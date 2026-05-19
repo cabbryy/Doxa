@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doxa — Mappamondo Emotivo | Official Interactive Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ==========================================================================
+           CORE DESIGN SYSTEM (PREMIUM DARK TECH / INTERACTIVE DESIGN)
+           ========================================================================== */
+        :root {
+            --bg-main: #030712;
+            --bg-card: #0b1329;
+            --bg-nav: rgba(3, 7, 18, 0.9);
+            --accent-green: #64ffda;
+            --accent-yellow: #ffaa00;
+            --accent-red: #ff3b3b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(100, 255, 218, 0.15);
+            --border-glow: rgba(100, 255, 218, 0.3);
+           
+            --font-title: 'Montserrat', sans-serif;
+            --font-body: 'Urbanist', sans-serif;
+            --font-tech: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient Glow Shadows */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 60%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 170, 0, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        section, header, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           VECTOR LOGO INTERACTIVE
+           ========================================================================== */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 48px;
+            height: 48px;
+            filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.2));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-box:hover .logo-svg {
+            transform: rotate(10deg) scale(1.05);
+        }
+
+        .logo-title {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 26px;
+            letter-spacing: 5px;
+            color: var(--text-main);
+        }
+
+        .logo-title span {
+            color: var(--accent-green);
+        }
+
+        /* ==========================================================================
+           NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 1000;
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-tech);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent-green);
+        }
+
+        /* ==========================================================================
+           HERO COMPONENT
+           ========================================================================== */
+        #home {
+            min-height: 100vh;
+            padding-top: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 35%, rgba(11, 19, 41, 0.5) 0%, var(--bg-main) 70%);
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 950px;
+            padding: 0 20px;
+        }
+
+        .hero-logo-large {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 30px;
+            animation: floating 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 35px rgba(100, 255, 218, 0.25));
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .hero-tagline {
+            font-family: var(--font-tech);
+            color: var(--accent-yellow);
+            font-size: 14px;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-inner h1 {
+            font-family: var(--font-title);
+            font-size: 86px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero-inner h1 span {
+            background: linear-gradient(45deg, var(--accent-green), #00f0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 22px;
+            color: var(--text-muted);
+            max-width: 780px;
+            margin: 0 auto 45px;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 4px;
+            font-family: var(--font-tech);
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            box-shadow: 0 4px 20px rgba(100, 255, 218, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 4px 30px var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-secondary:hover {
+            color: var(--text-main);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           SECTIONS STYLING
+           ========================================================================== */
+        section {
+            padding: 120px 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-header {
+            margin-bottom: 70px;
+        }
+
+        .section-index {
+            font-family: var(--font-tech);
+            color: var(--accent-green);
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-title);
+            font-size: 42px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        /* ==========================================================================
+           PRESENTATION / LAB INSIGHTS
+           ========================================================================== */
+        .presentation-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(11, 19, 41, 0.3) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 45px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .quote-block {
+            font-size: 24px;
+            line-height: 1.5;
+            color: var(--text-main);
+            font-weight: 300;
+            border-left: 4px solid var(--accent-yellow);
+            padding-left: 25px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 45px;
+        }
+
+        .metric-box {
+            background: #060b19;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: border-color 0.3s;
+        }
+
+        .metric-box:hover {
+            border-color: var(--border-glow);
+        }
+
+        .metric-box h3 {
+            font-family: var(--font-title);
+            font-size: 30px;
+            color: var(--accent-green);
+            margin-bottom: 4px;
+        }
+
+        .metric-box p {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           CONCEPT & CHROMATIC SCALE
+           ========================================================================== */
+        .color-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            background: rgba(11, 19, 41, 0.3);
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 5px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .color-item:hover {
+            transform: scale(1.02);
+        }
+
+        .color-item.green { border-left-color: var(--accent-green); }
+        .color-item.yellow { border-left-color: var(--accent-yellow); }
+        .color-item.red { border-left-color: var(--accent-red); }
+
+        .status-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            margin-top: 4px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .feat-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-6px);
+        }
+
+        .feat-icon {
+            font-size: 32px;
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+        }
+
+        .feat-card h4 {
+            font-family: var(--font-title);
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feat-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           HARDWARE FRAME & GRAPHICS
+           ========================================================================== */
+        .graphic-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #050a14;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            height: 480px;
+        }
+
+        .graphic-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: all 0.5s ease;
+        }
+
+        .graphic-wrapper:hover img {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .graphic-details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(3, 7, 18, 0.98));
+            padding: 30px;
+            pointer-events: none;
+        }
+
+        .tech-badge {
+            font-family: var(--font-tech);
+            color: var(--accent-green);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bullet-tech {
+            list-style: none;
+        }
+
+        .bullet-tech li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 22px;
+            font-size: 17px;
+            color: var(--text-main);
+        }
+
+        .bullet-tech li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--accent-green);
+            font-size: 18px;
+        }
+
+        /* ==========================================================================
+           SCHEDA PROGETTO
+           ========================================================================== */
+        .project-sheet-container {
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(6, 11, 25, 0.7) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 50px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .sheet-intro {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .sheet-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .sheet-block h3 {
+            font-family: var(--font-title);
+            font-size: 22px;
+            color: var(--text-main);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sheet-block h3 i {
+            color: var(--accent-green);
+            font-size: 18px;
+        }
+
+        .sheet-block p, .sheet-block ul {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .sheet-block ul {
+            list-style-type: none;
+        }
+
+        .sheet-block ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .sheet-block ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-yellow);
+        }
+
+        /* ==========================================================================
+           DATA MATRIX TABLE
+           ========================================================================== */
+        .matrix-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-card);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(100, 255, 218, 0.06);
+            color: var(--accent-green);
+            font-family: var(--font-tech);
+            font-size: 13px;
+            padding: 22px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 22px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 16px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        /* ==========================================================================
+           TEAM & CREATIVE EXPERTS
+           ========================================================================== */
+        .team-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        /* Profilo Linkabile Card System */
+        .profile-node-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .profile-node {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-node-link:hover .profile-node {
+            border-color: var(--border-glow);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .node-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--accent-green);
+            border: 1px dashed var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .profile-node-link:hover .node-avatar {
+            background: rgba(100, 255, 218, 0.15);
+            color: var(--text-main);
+            transform: scale(1.05);
+        }
+
+        .node-info h4 {
+            font-family: var(--font-title);
+            font-size: 22px;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .node-info p {
+            font-family: var(--font-tech);
+            color: var(--accent-yellow);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .history-node-wrapper {
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+            padding-top: 50px;
+        }
+
+        .profile-node.historical {
+            background: rgba(30, 41, 59, 0.15);
+            border-style: dashed;
+            max-width: 580px;
+        }
+
+        .profile-node.historical .node-avatar {
+            color: var(--text-muted);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: transparent;
+        }
+
+        .profile-node.historical .node-info p {
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           FOOTER STYLING
+           ========================================================================== */
+        footer {
+            background: #010409;
+            padding: 60px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-logo-center {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-tech-note {
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(148, 163, 184, 0.3);
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE INTERFACE
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 50px; }
+            .feature-cards, .team-layout, .sheet-grid { grid-template-columns: 1fr; }
+            .hero-inner h1 { font-size: 58px; }
+            header { padding: 15px 5%; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#home" class="logo-box">
+            <svg class="logo-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="48" fill="#111c24" stroke="#1f313d" stroke-width="1.5" />
+                <path d="M50,4 A46,46 0 0,0 50,96 Z" fill="#ffffff" />
+                <path d="M50,14 C40,14 36,22 34,26 C30,30 25,28 22,34 C18,42 22,50 25,54 C28,58 20,62 23,70 C26,78 35,74 38,82 C42,86 46,84 50,86 Z" fill="#11252b" />
+                <path d="M50,4 A46,46 0 0,1 50,96 Z" fill="#162e33" />
+                <path d="M50,18 C58,18 64,24 66,28 C72,30 76,38 78,44 C80,52 74,56 72,62 C70,68 64,74 62,80 C56,84 52,82 50,84 Z" fill="#2d6159" opacity="0.6"/>
+                <path d="M50,42 C46,42 43,46 41,50 C40,55 42,60 46,64 C49,67 50,65 52,62 C55,58 56,52 54,48 C52,44 51,42 50,42 Z" fill="#de9b35" />
+                <path d="M50,50 L84,24 A46,46 0 0,1 94,48 Z" fill="url(#doxa-radar-grad-exact)" />
+                <rect x="58" y="16" width="2" height="8" fill="#a4cf67" />
+                <rect x="62" y="13" width="2" height="13" fill="#399684" />
+                <rect x="66" y="18" width="2" height="6" fill="#d94b36" />
+                <path d="M82,38 L88,38 L91,42" fill="none" stroke="#f1f5f9" stroke-width="1" />
+                <circle cx="91" cy="42" r="1.5" fill="#f1f5f9" />
+                <path d="M78,74 L84,74 L88,71" fill="none" stroke="#d94b36" stroke-width="1" />
+                <circle cx="88" cy="71" r="1.5" fill="#d94b36" />
+                <line x1="72" y1="58" x2="86" y2="58" stroke="#cca43c" stroke-width="1.5" />
+                <circle cx="82" cy="58" r="2" fill="#cca43c" />
+                <line x1="72" y1="63" x2="89" y2="63" stroke="#399684" stroke-width="1.5" />
+                <circle cx="85" cy="63" r="2" fill="#399684" />
+                <path d="M38,62 A18,18 0 0,0 66,66" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.25" />
+                <path d="M32,68 A24,24 0 0,0 72,74" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2" opacity="0.4" />
+                <path d="M26,74 A32,32 0 0,0 78,82" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.15" />
+                <circle cx="61" cy="88" r="2.5" fill="#a4cf67" />
+                <defs>
+                    <linearGradient id="doxa-radar-grad-exact" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#4ade80" stop-opacity="0.8" />
+                        <stop offset="50%" stop-color="#fbbf24" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.9" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="logo-title">DOXA<span>.</span></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#presentazione">Presentazione</a></li>
+                <li><a href="#concept">Concept</a></li>
+                <li><a href="#scheda-progetto">Scheda Tecnica</a></li>
+                <li><a href="#hardware">Hardware</a></li>
+                <li><a href="#matrice">Dati</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-inner">
+            <div class="hero-logo-large">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <circle cx="50" cy="50" r="48" fill="#111c24" stroke="#1f313d" stroke-width="1.5" />
+                    <path d="M50,4 A46,46 0 0,0 50,96 Z" fill="#ffffff" />
+                    <path d="M50,14 C40,14 36,22 34,26 C30,30 25,28 22,34 C18,42 22,50 25,54 C28,58 20,62 23,70 C26,78 35,74 38,82 C42,86 46,84 50,86 Z" fill="#11252b" />
+                    <path d="M50,4 A46,46 0 0,1 50,96 Z" fill="#162e33" />
+                    <path d="M50,18 C58,18 64,24 66,28 C72,30 76,38 78,44 C80,52 74,56 72,62 C70,68 64,74 62,80 C56,84 52,82 50,84 Z" fill="#2d6159" opacity="0.6"/>
+                    <path d="M50,42 C46,42 43,46 41,50 C40,55 42,60 46,64 C49,67 50,65 52,62 C55,58 56,52 54,48 C52,44 51,42 50,42 Z" fill="#de9b35" />
+                    <path d="M50,50 L84,24 A46,46 0 0,1 94,48 Z" fill="url(#hero-radar-grad-exact-large)" />
+                    <rect x="58" y="16" width="2" height="8" fill="#a4cf67" />
+                    <rect x="62" y="13" width="2" height="13" fill="#399684" />
+                    <rect x="66" y="18" width="2" height="6" fill="#d94b36" />
+                    <circle cx="61" cy="88" r="2.5" fill="#a4cf67" />
+                    <defs>
+                        <linearGradient id="hero-radar-grad-exact-large" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#4ade80" stop-opacity="0.85" />
+                            <stop offset="50%" stop-color="#fbbf24" stop-opacity="0.85" />
+                            <stop offset="100%" stop-color="#ef4444" stop-opacity="0.95" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="hero-tagline">Interaction Design Project</div>
+            <h1>Lo stato del mondo in uno <span>sguardo</span></h1>
+            <p class="hero-desc">Doxa converte metriche macroeconomiche e geopolitiche in impulsi luminosi ed emotivi. Un connubio perfetto tra Data Visualization e Physical Computing.</p>
+            <div class="btn-group">
+                <a href="#presentazione" class="btn btn-primary">Scopri il Progetto</a>
+                <a href="#scheda-progetto" class="btn btn-secondary">Scheda Tecnica</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="presentazione">
+        <div class="section-header">
+            <span class="section-index">01 / DISCOVERY</span>
+            <h2>Presentazione del Progetto</h2>
+        </div>
+        <div class="grid-2">
+            <div>
+                <div class="presentation-card">
+                    <div class="quote-block">
+                        "Come reinterpretare un elemento d'arredo comune e caricarlo di coscienza collettiva globale?"
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 16px; line-height: 1.8;">
+                        Doxa nasce durante le sessioni d'aula del corso di Interaction Design, stimolato dall'analisi degli oggetti statici del nostro quotidiano. L'ispezione si è focalizzata su una **vecchia lampadina sferica**, storicamente usata solo per fare luce in camera. L'abbiamo svuotata della sua funzione passiva per tramutarla in un mappamondo parlante.
+                    </p>
+                </div>
+            </div>
+            <div>
+                <p style="font-size: 19px; margin-bottom: 20px; font-weight: 600;">Interazione Fisica Emotiva</p>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">
+                    Integrando all'interno del guscio trasparente una matrice ordinata di LED RGB indirizzabili collegati a un controller joystick sulla base prototipale, l'utente ha la facoltà di navigare le coordinate del globo terrestre.
+                </p>
+                <p style="color: var(--text-muted);">
+                    Il dispositivo risponde istantaneamente interrogando database interni e proiettando all'esterno non una semplice luce, ma un vero e proprio "giudizio visivo" sulla stabilità dell'area selezionata.
+                </p>
+               
+                <div class="metric-row">
+                    <div class="metric-box">
+                        <h3>3</h3>
+                        <p>Fasce di Criticità</p>
+                    </div>
+                    <div class="metric-box">
+                        <h3>100%</h3>
+                        <p>Cablaggio Assiale</p>
+                    </div>
+                    <div class="metric-box">
+                        <h3>Arduino</h3>
+                        <p>Core Logic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="concept">
+        <div class="section-header">
+            <span class="section-index">02 / CORE LOGIC</span>
+            <h2>Il Concept &amp; Lo Spettro Cromatico</h2>
+        </div>
+        <div class="grid-2">
+            <div>
+                <p style="font-size: 19px; margin-bottom: 25px; font-weight: 400; color: var(--text-main);">
+                    Doxa elabora in tempo reale tre indicatori cardine per ogni macro-area geografica: il **Prodotto Interno Lordo (PIL)**, l'**Indice di Sviluppo Umano (ISU)** e lo **Stato di Benessere Sanitario**.
+                </p>
+                <p style="color: var(--text-muted); line-height: 1.7;">
+                    Questi dati, complessi da interpretare in forma tabellare, vengono tradotti in una risposta cromatica immediata basata sulle tre lunghezze d'onda del brand, capaci di attivare una reazione psicologica istantanea nell'osservatore.
+                </p>
+            </div>
+            <div class="color-list">
+                <div class="color-item green">
+                    <div class="status-dot" style="background-color: var(--accent-green);"></div>
+                    <div>
+                        <strong style="color: var(--accent-green); display:block; font-family: var(--font-title); font-size:15px; letter-spacing:1px; margin-bottom:4px;">VERDE — STABILITÀ / BENESSERE</strong>
+                        <p style="font-size:14px; color: var(--text-muted);">Indica territori caratterizzati da elevata aspettativa di vita, tassi di scolarizzazione massimi e stabilità istituzionale.</p>
+                    </div>
+                </div>
+                <div class="color-item yellow">
+                    <div class="status-dot" style="background-color: var(--accent-yellow);"></div>
+                    <div>
+                        <strong style="color: var(--accent-yellow); display:block; font-family: var(--font-title); font-size:15px; letter-spacing:1px; margin-bottom:4px;">GIALLO — ECONOMIE IN TRANSIZIONE</strong>
+                        <p style="font-size:14px; color: var(--text-muted);">Evidenzia aree in via di sviluppo industriale affette da squilibri di welfare localizzati o mercati ad alta volatilità.</p>
+                    </div>
+                </div>
+                <div class="color-item red">
+                    <div class="status-dot" style="background-color: var(--accent-red);"></div>
+                    <div>
+                        <strong style="color: var(--accent-red); display:block; font-family: var(--font-title); font-size:15px; letter-spacing:1px; margin-bottom:4px;">ROSSO — CRITICITÀ ELEVATA</strong>
+                        <p style="font-size:14px; color: var(--text-muted);">Segnala scenari di crisi umanitaria attiva, conflitti geopolitici interni, iperinflazione o pesanti emergenze climatiche.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-cards">
+            <div class="card feat-card">
+                <div class="feat-icon"><i class="fa-solid fa-gamepad"></i></div>
+                <h4>Tracciamento Analogico</h4>
+                <p>La navigazione cartografica è gestita da un joystick analogico a due assi posizionato simmetricamente per un feedback fluido.</p>
+            </div>
+            <div class="card feat-card">
+                <div class="feat-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h4>Doppio Output Informativo</h4>
+                <p>Mentre i LED proiettano la percezione cromatico-emotiva, il display integrato alla base mostra la verità analitica dei dati scientifici.</p>
+            </div>
+            <div class="card feat-card">
+                <div class="feat-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                <h4>Architettura Scalabile</h4>
+                <p>Il sistema software è pronto per un'espansione totale tramite Shift Register, permettendo in futuro di mappare singole nazioni.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="scheda-progetto">
+        <div class="section-header">
+            <span class="section-index">03 / TECHNICAL SPECIFICATION</span>
+            <h2>Scheda Progetto Doxa</h2>
+        </div>
+       
+        <div class="project-sheet-container">
+            <p class="sheet-intro">
+                Di seguito sono riportate las specifiche strutturali, i componenti di calcolo ed estetici che danno vita al prototipo di Interaction Design.
+            </p>
+           
+            <div class="sheet-grid">
+                <div class="sheet-block">
+                    <h3><i class="fa-solid fa-layer-group"></i> Componenti Hardware della Base</h3>
+                    <ul>
+                        <li><strong>Scocca di Supporto:</strong> Base circolare custom di colore blu scuro opaco dotata di alloggiamenti stabili per l'elettronica di controllo e visualizzazione analitica.</li>
+                        <li><strong>Controller Joystick Analogico:</strong> Un potenziometro a due assi (X/Y) installato sul lato destro che permette lo spostamento fluido del mirino di selezione geografica sul globo.</li>
+                        <li><strong>Display LCD Principale:</strong> Schermo alfanumerico retroilluminato in blu (16x2 caratteri) posizionato a sinistra; indica l'area analizzata in tempo reale (es. "PAESE: EUROPA").</li>
+                        <li><strong>Display OLED Secondario:</strong> Schermo grafico monocromatico centrale dedicato alla visualizzazione di icone cartografiche e loghi vettoriali della macro-regione attiva.</li>
+                    </ul>
+                </div>
+
+                <div class="sheet-block">
+                    <h3><i class="fa-solid fa-globe"></i> Struttura Superiore &amp; Illuminazione</h3>
+                    <ul>
+                        <li><strong>Globo Cartografico Fisico:</strong> Mappamondo vintage installato ad incastro assiale sul modulo di comando, configurato come diffusore ottico dei parametri macroeconomici.</li>
+                        <li><strong>Indicatori LED di Stato:</strong> Matrice di diodi RGB ad alta luminosità integrati sotto la superficie del guscio, programmati per accendersi in corrispondenza dei nodi geopolitici cruciali.</li>
+                        <li><strong>Placca del Brand:</strong> Stemma circolare identificativo applicato sulla superficie del globo che riproduce fedelmente l'iconografia ufficiale del progetto Doxa.</li>
+                        <li><strong>Gestione Segnale:</strong> Sistema integrato basato su architettura Arduino Core Logic per la conversione diretta degli input analogici in stringhe di output cromatico-testuale.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hardware">
+        <div class="section-header">
+            <span class="section-index">04 / ARCHITECTURE</span>
+            <h2>Ingegnerizzazione Hardware &amp; Sviluppo Arduino</h2>
+        </div>
+        <div class="grid-2">
+            <div class="graphic-wrapper">
+                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa">
+                <div class="graphic-details">
+                    <span class="tech-badge">PROTOTIPO SPERIMENTALE V1.0</span>
+                    <p style="font-size:14px; color: var(--text-muted);">Vista della calotta inferiore con rialzo stabilizzato per il cable-management logico.</p>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-family: var(--font-title); font-size: 26px; margin-bottom: 25px; text-transform: uppercase;">Problem Solving &amp; Soluzioni Applicate</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">
+                    Durante la fase di assemblaggio del prototipo abbiamo isolato e superato criticità strutturali importanti, documentando ogni soluzione tecnica per garantire pulizia ed efficienza:
+                </p>
+                <ul class="bullet-tech">
+                    <li><i class="fa-solid fa-microchip"></i> <strong>Piattaforma Arduino:</strong> Un microcontrollore centrale campiona gli ingressi del joystick traducendoli istantaneamente nelle matrici di commutazione dei LED.</li>
+                    <li><i class="fa-solid fa-arrows-spin"></i> <strong>Tunnel Assiale Rotatorio:</strong> Per ovviare all'aggrovigliamento dei fili interni dovuto alla rotazione del globo, abbiamo smontato l'attacco in metallo originale della vecchia lampadina, facendo scorrere tutti i cavi all'interno di un condotto flessibile verticale.</li>
+                    <li><i class="fa-solid fa-hashtag"></i> <strong>Codifica Rigida dei Cavi:</strong> Ogni conduttore sulla breadboard rialzata è stato numerato singolarmente per massimizzare la velocità di manutenance hardware e l'ottimizzazione del codice.</li>
+                    <li><i class="fa-solid fa-lightbulb"></i> <strong>Alloggiamenti Ottici Custom:</strong> Abbiamo progettato degli appoggi dedicati per i diodi LED, bloccandoli senza l'uso di colle a caldo volatili, preservando la trasparenza del guscio.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="matrice">
+        <div class="section-header">
+            <span class="section-index">05 / METRICS MATRIX</span>
+            <h2>Database Interno &amp; Mappatura Aree</h2>
+        </div>
+        <p style="margin-bottom: 35px; font-size: 17px; color: var(--text-muted); max-width: 850px;">
+            La tabella seguente illustra la segmentazione logica implementata nel firmware Arduino. Ciascuna macro-area associa i dati statistici globali all'output visivo corrispondente sul prototipo.
+        </p>
+        <div class="matrix-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Macro-Area Geografica</th>
+                        <th>Stato Cromatico LED</th>
+                        <th>Volume Popolazione</th>
+                        <th>PIL Medio Stimato</th>
+                        <th>Dettaglio Analitico Display</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 700;">Europa / Nord America</td>
+                        <td><span style="color: var(--accent-green); font-family: var(--font-tech); font-weight: bold;">● VERDE (Welfare)</span></td>
+                        <td>740 Milioni</td>
+                        <td>$ 17 Trilioni</td>
+                        <td>Elevata protezione sociale, stabilità geopolitica, sistemi sanitari strutturati.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 700;">Sud Asia / America Latina</td>
+                        <td><span style="color: var(--accent-yellow); font-family: var(--font-tech); font-weight: bold;">● GIALLO (Transizione)</span></td>
+                        <td>2 Miliardi</td>
+                        <td>$ 6 Trilioni</td>
+                        <td>Mercati in fortissima espansione, ma affetti da sproporzione nella ridistribuzione del reddito.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 700;">Sub-Sahara / Medio Oriente</td>
+                        <td><span style="color: var(--accent-red); font-family: var(--font-tech); font-weight: bold;">● ROSSO (Criticità)</span></td>
+                        <td>500 Milioni</td>
+                        <td>$ 3 Trilioni</td>
+                        <td>Emergenze geopolitiche attive, scarsità cronica di infrastrutture e vulnerabilità ecologica.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="section-header">
+            <span class="section-index">06 / CREDITS</span>
+            <h2>Sviluppatori &amp; Autori del Progetto</h2>
+        </div>
+       
+        <div class="team-layout">
+            <a href="https://mirkocabras.wordpress.com/" target="_blank" class="profile-node-link">
+                <div class="profile-node">
+                    <div class="node-avatar"><i class="fa-solid fa-code"></i></div>
+                    <div class="node-info">
+                        <h4>Mirko Cabras</h4>
+                        <p>Lead Interaction Developer &amp; System Engineer</p>
+                    </div>
+                </div>
+            </a>
+           
+            <a href="https://alessandrozanutta.wordpress.com/" target="_blank" class="profile-node-link">
+                <div class="profile-node">
+                    <div class="node-avatar"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="node-info">
+                        <h4>Alessandro Zanutta</h4>
+                        <p>Lead Hardware Architect &amp; Product Designer</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="history-node-wrapper">
+            <h4 style="font-family: var(--font-title); font-size: 15px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 25px; text-transform: uppercase;">Evoluzione Storica Team</h4>
+            <div class="profile-node historical">
+                <div class="node-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                <div class="node-info">
+                    <h4>Pietro Albanese</h4>
+                    <p>Ex-Founder / Collaboratore Progetto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo-center">
+            <svg viewBox="0 0 100 100" width="45" height="45">
+                <circle cx="50" cy="50" r="48" fill="#111c24" opacity="0.4"/>
+                <path d="M50,4 A46,46 0 0,0 50,96 Z" fill="#ffffff" opacity="0.2" />
+                <path d="M50,4 A46,46 0 0,1 50,96 Z" fill="#2d6159" opacity="0.3" />
+                <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+            </svg>
+        </div>
+        <p>&copy; 2026 Doxa Project — Laboratorio d'Esame di Interaction Design.</p>
+        <p class="footer-tech-note">Sviluppato interamente con codice pulito, logiche emulative Open-Source e architetture fisiche interattive.</p>
+    </footer>
+
+</body>
+</html>
