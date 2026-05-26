@@ -131,14 +131,14 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 25px;
         }
 
         nav a {
             color: var(--text-muted);
             text-decoration: none;
             font-family: var(--font-tech);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -257,6 +257,12 @@
             font-weight: 500;
             letter-spacing: 1px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-primary {
@@ -319,7 +325,6 @@
             align-items: center;
         }
 
-        /* Classe per uniformare i testi descrittivi ed eliminare gli stili inline */
         .text-block-p {
             color: var(--text-muted);
             font-size: 16px;
@@ -418,11 +423,26 @@
         .color-item.red { border-left-color: var(--accent-red); }
 
         .status-dot {
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            margin-top: 4px;
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            margin-top: 6px;
+            position: relative;
+        }
+
+        /* Pulse Animation per i LED dello stato */
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%;
+            animation: pulseGlow 2s infinite;
+            background: inherit;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(2.4); opacity: 0; }
         }
 
         .color-title-strong {
@@ -498,7 +518,7 @@
         .graphic-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Cambiato a contain o cover in base alla resa del logo */
+            object-fit: contain;
             background-color: #060b19;
             opacity: 0.85;
             transition: all 0.5s ease;
@@ -605,7 +625,350 @@
         .led-status.red { color: var(--accent-red); }
 
         /* ==========================================================================
-           TEAM & CREATIVE EXPERTS
+           VETRINA PRODOTTO INTERATTIVA 3D (ZANUTTA-CABRAS SPEC)
+           ========================================================================== */
+        .product-showcase {
+            background: radial-gradient(circle at 50% 50%, #0c152b 0%, var(--bg-main) 80%);
+            border-bottom: 2px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .stage-view-3d {
+            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* Card 3D Tilt gestita via JS */
+        .display-card-3d {
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(135deg, #0d1a3a 0%, #040814 100%);
+            border: 1px solid rgba(100, 255, 218, 0.25);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 45px 85px rgba(0, 0, 0, 0.6);
+            transform-style: preserve-3d;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .image-render-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #02040a;
+            position: relative;
+            transform: translateZ(45px); /* Notevole effetto di stacco spaziale */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+        }
+
+        .product-main-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            filter: brightness(0.95) contrast(1.05);
+        }
+
+        .floating-tech-tag {
+            position: absolute;
+            bottom: 35px;
+            right: 40px;
+            background: rgba(3, 7, 18, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-green);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: var(--accent-green);
+            letter-spacing: 2px;
+            transform: translateZ(75px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            font-family: var(--font-title);
+            font-size: 46px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-price span { color: var(--accent-green); }
+        .product-price del { font-size: 22px; color: var(--text-muted); font-weight: 400; }
+
+        .badge-limited {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+            font-family: var(--font-tech);
+            font-size: 11px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+        }
+
+        /* ==========================================================================
+           IPOTETICA SEZIONE DI ACQUISTO (BUY HUB FORM)
+           ========================================================================== */
+        .buy-hub-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .buy-hub-section.active {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 40px;
+        }
+
+        .buy-card {
+            background: linear-gradient(145deg, #070e1e 0%, #040814 100%);
+            border: 1px solid var(--accent-green);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(100, 255, 218, 0.1);
+        }
+
+        .buy-card h4 {
+            font-family: var(--font-title);
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .buy-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--accent-green);
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            background: #030712;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 14px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* ==========================================================================
+           ROADMAP FUTURE VISION
+           ========================================================================== */
+        .future-vision-container {
+            margin-top: 90px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 70px;
+        }
+
+        .future-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .roadmap-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .roadmap-step {
+            background: rgba(11, 19, 41, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .roadmap-step h4 {
+            font-family: var(--font-title);
+            font-size: 18px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .roadmap-step h4 span {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            color: var(--accent-yellow);
+            background: rgba(255, 170, 0, 0.08);
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        .roadmap-step p { font-size: 14px; color: var(--text-muted); }
+
+        .tech-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #111827;
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), #00f0ff);
+            border-radius: 3px;
+            width: 0; /* Animata via JS all'attivazione */
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================================================
+           TESTIMONIALS & SOCIAL PROOF (NOVITÀ AGGIUNTA)
+           ========================================================================== */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: rgba(11, 19, 41, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px; right: 25px;
+            font-size: 60px;
+            color: rgba(100, 255, 218, 0.08);
+            font-family: var(--font-title);
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-info h5 { font-family: var(--font-title); font-size: 15px; color: var(--text-main); }
+        .author-info p { font-family: var(--font-tech); font-size: 11px; color: var(--accent-yellow); }
+
+        /* ==========================================================================
+           FAQ ACCORDION COMPONENT (NOVITÀ AGGIUNTA)
+           ========================================================================== */
+        .faq-container {
+            max-width: 850px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--bg-card);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 22px 30px;
+            text-align: left;
+            color: var(--text-main);
+            font-family: var(--font-title);
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-trigger i {
+            color: var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-trigger i {
+            transform: rotate(180deg);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(3, 7, 18, 0.4);
+        }
+
+        .faq-content-inner {
+            padding: 0 30px 25px 30px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           TEAM SECTION (RUOLI INVERTITI HARDWARE/CODING)
            ========================================================================== */
         .team-layout {
             display: grid;
@@ -621,11 +984,16 @@
             display: flex;
             align-items: center;
             gap: 25px;
-            transition: border-color 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .profile-node:hover {
-            border-color: var(--border-glow);
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.08);
+            transform: translateY(-4px);
         }
 
         .node-avatar {
@@ -639,53 +1007,27 @@
             font-size: 26px;
             color: var(--accent-green);
             border: 1px dashed var(--accent-green);
+            transition: transform 0.3s ease;
         }
 
-        .node-info h4 {
-            font-family: var(--font-title);
-            font-size: 22px;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
+        .profile-node:hover .node-avatar {
+            transform: scale(1.08) rotate(5deg);
+            background: rgba(100, 255, 218, 0.12);
         }
 
-        .node-info p {
-            font-family: var(--font-tech);
-            color: var(--accent-yellow);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .node-info h4 { font-family: var(--font-title); font-size: 22px; margin-bottom: 4px; }
+        .node-info p { font-family: var(--font-tech); color: var(--accent-yellow); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; }
 
-        .history-node-wrapper {
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-            margin-top: 60px;
-            padding-top: 50px;
-        }
+        .node-link-indicator { margin-left: auto; color: var(--text-muted); font-size: 16px; transition: transform 0.3s, color 0.3s; }
+        .profile-node:hover .node-link-indicator { color: var(--accent-green); transform: translateX(5px); }
 
-        .historical-title {
-            font-family: var(--font-title);
-            font-size: 15px;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
+        .history-node-wrapper { border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 60px; padding-top: 50px; }
+        .historical-title { font-family: var(--font-title); font-size: 15px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 25px; text-transform: uppercase; }
 
-        .profile-node.historical {
-            background: rgba(30, 41, 59, 0.15);
-            border-style: dashed;
-            max-width: 580px;
-        }
-
-        .profile-node.historical .node-avatar {
-            color: var(--text-muted);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: transparent;
-        }
-
-        .profile-node.historical .node-info p {
-            color: var(--text-muted);
-        }
+        .profile-node.historical { background: rgba(30, 41, 59, 0.15); border-style: dashed; max-width: 580px; cursor: default; }
+        .profile-node.historical:hover { border-color: var(--border); box-shadow: none; transform: none; }
+        .profile-node.historical .node-avatar { color: var(--text-muted); border-color: rgba(255, 255, 255, 0.2); background: transparent; }
+        .profile-node.historical .node-info p { color: var(--text-muted); }
 
         /* ==========================================================================
            FOOTER STYLING
@@ -699,42 +1041,21 @@
             font-size: 14px;
         }
 
-        .footer-logo-center {
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .footer-logo-img {
-            width: 65px;
-            height: 65px;
-            object-fit: contain;
-            opacity: 0.5;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-
-        .footer-logo-center:hover .footer-logo-img {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        .footer-tech-note {
-            font-family: var(--font-tech);
-            font-size: 11px;
-            color: rgba(148, 163, 184, 0.3);
-            margin-top: 12px;
-            letter-spacing: 0.5px;
-        }
+        .footer-logo-center { margin-bottom: 25px; display: flex; justify-content: center; }
+        .footer-logo-img { width: 65px; height: 65px; object-fit: contain; opacity: 0.5; transition: opacity 0.3s, transform 0.3s; }
+        .footer-logo-center:hover .footer-logo-img { opacity: 0.9; transform: scale(1.05); }
+        .footer-tech-note { font-family: var(--font-tech); font-size: 11px; color: rgba(148, 163, 184, 0.3); margin-top: 12px; }
 
         /* ==========================================================================
            RESPONSIVE INTERFACE
            ========================================================================== */
         @media (max-width: 1024px) {
-            .grid-2 { grid-template-columns: 1fr; gap: 50px; }
+            .grid-2, .future-grid, .testimonial-grid { grid-template-columns: 1fr; gap: 50px; }
             .feature-cards, .team-layout { grid-template-columns: 1fr; }
-            .hero-inner h1 { font-size: 58px; }
+            .hero-inner h1 { font-size: 52px; }
             header { padding: 15px 5%; }
             nav ul { display: none; }
+            .display-card-3d { transform: none !important; }
         }
     </style>
 </head>
@@ -752,6 +1073,8 @@
                 <li><a href="#concept">Concept</a></li>
                 <li><a href="#hardware">Hardware</a></li>
                 <li><a href="#matrice">Dati</a></li>
+                <li><a href="#prodotto">Prodotto & Vision</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#team">Team</a></li>
             </ul>
         </nav>
@@ -767,7 +1090,7 @@
             <p class="hero-desc">Doxa converte metriche macroeconomiche e geopolitiche in impulsi luminosi ed emotivi. Un connubio perfetto tra Data Visualization e Physical Computing.</p>
             <div class="btn-group">
                 <a href="#presentazione" class="btn btn-primary">Scopri il Progetto</a>
-                <a href="#hardware" class="btn btn-secondary">Specifiche Tecniche</a>
+                <a href="#prodotto" class="btn btn-secondary"><i class="fa-solid fa-store"></i> Preordina Doxa Core</a>
             </div>
         </div>
     </section>
@@ -848,7 +1171,7 @@
                     <div class="status-dot" style="background-color: var(--accent-red);"></div>
                     <div>
                         <strong class="color-title-strong">ROSSO — CRITICITÀ ELEVATA</strong>
-                        <p class="color-desc-p">Segnala scenari di crisis umanitaria attiva, conflitti geopolitici interni, iperinflazione o pesanti emergenze climatiche.</p>
+                        <p class="color-desc-p">Segnala scenari di crisi umanitaria attiva, conflitti geopolitici interni, iperinflazione o pesanti emergenze climatiche.</p>
                     </div>
                 </div>
             </div>
@@ -880,7 +1203,7 @@
         </div>
         <div class="grid-2">
             <div class="graphic-wrapper">
-                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa - Prototipo V1.0">
+                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa">
                 <div class="graphic-details">
                     <span class="tech-badge">PROTOTIPO SPERIMENTALE V1.0</span>
                     <p style="font-size:14px; color: var(--text-muted);">Vista della calotta inferiore con rialzo stabilizzato per il cable-management logico.</p>
@@ -893,9 +1216,9 @@
                 </p>
                 <ul class="bullet-tech">
                     <li><i class="fa-solid fa-microchip"></i> <strong>Piattaforma Arduino:</strong> Un microcontrollore centrale campiona gli ingressi del joystick traducendoli istantaneamente nelle matrici di commutazione dei LED.</li>
-                    <li><i class="fa-solid fa-arrows-spin"></i> <strong>Tunnel Assiale Rotatorio:</strong> Per ovviare all'aggrovigliamento dei fili interni dovuto alla rotazione del globo, abbiamo smontato l'attacco in metallo originale della vecchia lampadina, facendo scorrere tutti i cavi all'interno di un condotto flessibile verticale.</li>
+                    <li><i class="fa-solid fa-arrows-spin"></i> <strong>Tunnel Assiale Rotatorio:</strong> Per ovviare all'aggrovigliamento dei fili interni dovuto alla rotazione del globo, abbiamo smontato l'attacco originale, facendo scorrere tutti i cavi all'interno di un condotto flessibile verticale.</li>
                     <li><i class="fa-solid fa-hashtag"></i> <strong>Codifica Rigida dei Cavi:</strong> Ogni conduttore sulla breadboard rialzata è stato numerato singolarmente per massimizzare la velocità di manutenzione hardware e l'ottimizzazione del codice.</li>
-                    <li><i class="fa-solid fa-lightbulb"></i> <strong>Alloggiamenti Ottici Custom:</strong> Abbiamo progettato degli appoggi dedicati per i diodi LED, bloccandoli senza l'uso di colle a caldo volatili, preservando la trasparenza del guscio.</li>
+                    <li><i class="fa-solid fa-lightbulb"></i> <strong>Alloggiamenti Ottici Custom:</strong> Abbiamo progettato degli appoggi dedicati per i diodi LED, bloccandoli in asse senza l'uso di colle a caldo volatili, preservando la trasparenza del guscio.</li>
                 </ul>
             </div>
         </div>
@@ -947,27 +1270,183 @@
         </div>
     </section>
 
+    <section id="prodotto" class="product-showcase">
+        <div class="section-header">
+            <span class="section-index">05 / EXCLUSIVE VITRINE</span>
+            <h2>Doxa Core Premium Edition</h2>
+        </div>
+        <div class="grid-2">
+            <div class="stage-view-3d">
+                <div class="display-card-3d" id="tiltCard">
+                    <div class="image-render-container">
+                        <img src="https://i.ibb.co/PsVcysbL/Doxa-ES.png" alt="Doxa Premium Pro - Visione Tridimensionale Interattiva" class="product-main-img">
+                    </div>
+                    <div class="floating-tech-tag"><i class="fa-solid fa-circle-nodes"></i> PRE-PRODUCTION HUB</div>
+                </div>
+            </div>
+            <div>
+                <span class="badge-limited"><i class="fa-solid fa-crown"></i> Edizione Da Collezione Limitata</span>
+                <h3 style="font-family: var(--font-title); font-size: 36px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -0.5px;">Il Futuro dei Dati Esecutivi</h3>
+                <p class="text-block-p" style="margin-bottom: 20px;">
+                    Portati a casa la massima espressione fisica dell'Interaction Design. Questa edizione speciale di **Doxa** include il modulo sferico ad alta rifrazione, la docking station rifinita in tinta *Navy Tech* ad alta densità con display LCD diagnostici integrati alla base, selettore joystick analogico e alimentatore stabilizzato. 
+                </p>
+                <div class="product-price">
+                    <del>€ 149.00</del> € 89.<span>99</span>
+                </div>
+                <button id="buyBtn" onclick="toggleBuyHub()" class="btn btn-primary style-btn" style="width: 100%; max-width: 400px; padding: 20px;">
+                    <i class="fa-solid fa-basket-shopping"></i> Preordina il Modello Esclusivo
+                </button>
+            </div>
+        </div>
+
+        <div class="buy-hub-section" id="buyHub">
+            <div class="buy-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h4><i class="fa-solid fa-paper-plane" style="color: var(--accent-green); margin-right: 10px;"></i> Richiesta di Preordine Anticipato</h4>
+                        <p>Compila il modulo sottostante. Il sistema configurerà la richiesta ufficiale indirizzandola direttamente ai fondatori del progetto.</p>
+                    </div>
+                    <button onclick="toggleBuyHub()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 20px;"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                
+                <form id="purchaseForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="userEmail">Il tuo Indirizzo Email</label>
+                        <input type="email" id="userEmail" class="form-control" placeholder="esempio@dominio.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userNote">Note d'Acquisto o Personalizzazioni Base</label>
+                        <textarea id="userNote" class="form-control" placeholder="Inserisci eventuali domande o specifiche per il tuo pezzo da collezione (es. numero seriale preferito, richieste hardware)..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background: var(--accent-green); color: #000; font-weight: 700; width: 100%;">
+                        <i class="fa-solid fa-envelope-open-text"></i> Invia Richiesta d'Acquisto all'Owner
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="future-vision-container">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <span class="section-index">// SCALABILITY ROADMAP</span>
+                <h3 style="font-family: var(--font-title); font-size: 26px; text-transform: uppercase;">Sviluppo Futuro del Progetto</h3>
+            </div>
+            <div class="future-grid">
+                <div>
+                    <p class="text-block-p" style="font-size: 17px; margin-bottom: 20px; color: var(--text-main);">
+                        Doxa non si ferma allo stato di prototipo accademico. Il sistema è stato concepito con una struttura modulare flessibile pronta a scalare verso scenari di data visualization industriale e analisi geopolitica di livello enterprise.
+                    </p>
+                    <p class="text-block-p">
+                        Grazie all'espansione della memoria logica e all'integrazione di moduli di connettività wireless avanzati, la roadmap prevede il passaggio dalla visualizzazione per macro-aree a un monitoraggio atomico ad altissima fedeltà.
+                    </p>
+                    
+                    <div class="testimonial-grid">
+    <div class="testimonial-card">
+        <p class="testimonial-text">"Ottimizzando il codice Arduino, abbiamo trasformato freddi dati numerici in impulsi cromatici ed emotivi fluidi."</p>
+        <div class="testimonial-author">
+            <div class="author-info">
+                <h5>Mirko Cabras</h5>
+                <p>Lead Interaction Developer</p>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-card">
+        <p class="testimonial-text">"Progettando da zero il tunnel assiale rotatorio, abbiamo eliminato ogni torsione dei cavi, dando stabilità al globo."</p>
+        <div class="testimonial-author">
+            <div class="author-info">
+                <h5>Alessandro Zanutta</h5>
+                <p>Lead Hardware Architect</p>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+                <div class="roadmap-list" id="roadmapSection">
+                    <div class="roadmap-step">
+                        <h4>Mappatura 1:1 dei Singoli Stati <span>In Sviluppo</span></h4>
+                        <p>Sostituzione della matrice LED attuale con una griglia micro-LED indirizzabile tramite Shift Register seriali per isolare e illuminare singolarmente i confini di ciascuna nazione.</p>
+                        <div class="tech-progress-bar"><div class="progress-fill" data-progress="85%"></div></div>
+                    </div>
+                    <div class="roadmap-step">
+                        <h4>Integrazione AI Sentiment Analysis <span>Pianificato</span></h4>
+                        <p>Integrazione di algoritmi predittivi per analizzare il sentiment dei social network e dei canali di news internazionali, mutando il colore del globo prima dei report macroeconomici ufficiali.</p>
+                        <div class="tech-progress-bar"><div class="progress-fill" data-progress="60%"></div></div>
+                    </div>
+                    <div class="roadmap-step">
+                        <h4>Sincronizzazione Web API Real-Time <span>R&D Phase</span></h4>
+                        <p>Sostituzione del database statico memorizzato sulla ROM di Arduino con un modulo Wi-Fi ESP32 per interrogare costantemente le API della Banca Mondiale e dell'OMS.</p>
+                        <div class="tech-progress-bar"><div class="progress-fill" data-progress="40%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="section-header" style="text-align: center;">
+            <span class="section-index">06 / SERVICE DESK</span>
+            <h2>Domande Frequenti</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-trigger" onclick="toggleFaq(this)">
+                    Come viene alimentato Doxa Core?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-content-inner">
+                        Doxa Core viene alimentato tramite un classico cavo USB-C incluso nella confezione che si collega direttamente alla docking station posteriore. Il consumo complessivo è ridotto al minimo grazie ai diodi LED RGB ad alta efficienza.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger" onclick="toggleFaq(this)">
+                    Posso aggiornare i dati macroeconomici all'interno?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-content-inner">
+                        Certamente. Il modello Premium Edition dispone di una porta dati ausiliaria che permette di flashare e sovrascrivere il database interno di Arduino tramite una comoda interfaccia desktop open source fornita dopo il preordine.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger" onclick="toggleFaq(this)">
+                    Come funziona la spedizione dei modelli preordinati?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-content-inner">
+                        I pezzi vengono assemblati a mano nei laboratori di Interaction Design. Non appena inoltrata la richiesta all'owner tramite il form dedicato, verrai ricontattato con i tempi di lavorazione e le specifiche di spedizione tracciata.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="team">
         <div class="section-header">
-            <span class="section-index">05 / CREDITS</span>
+            <span class="section-index">07 / CREDITS</span>
             <h2>Sviluppatori & Autori del Progetto</h2>
         </div>
         
         <div class="team-layout">
-            <div class="profile-node">
-                <div class="node-avatar"><i class="fa-solid fa-code"></i></div>
-                <div class="node-info">
-                    <h4>Alessandro Zanutta</h4>
-                    <p>Lead Interaction Developer & System Engineer</p>
-                </div>
-            </div>
-            <div class="profile-node">
+            <a href="https://alessandrozanutta.wordpress.com/" target="_blank" rel="noopener noreferrer" class="profile-node">
                 <div class="node-avatar"><i class="fa-solid fa-microchip"></i></div>
                 <div class="node-info">
-                    <h4>Mirko Cabras</h4>
+                    <h4>Alessandro Zanutta</h4>
                     <p>Lead Hardware Architect & Product Designer</p>
                 </div>
-            </div>
+                <i class="fa-solid fa-arrow-up-right-from-square node-link-indicator"></i>
+            </a>
+            
+            <a href="https://mirkocabras.wordpress.com/" target="_blank" rel="noopener noreferrer" class="profile-node">
+                <div class="node-avatar"><i class="fa-solid fa-code"></i></div>
+                <div class="node-info">
+                    <h4>Mirko Cabras</h4>
+                    <p>Lead Interaction Developer & System Engineer</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square node-link-indicator"></i>
+            </a>
         </div>
 
         <div class="history-node-wrapper">
@@ -990,5 +1469,110 @@
         <p class="footer-tech-note">Sviluppato interamente con codice pulito, logiche emulative Open-Source e architetture fisiche interattive.</p>
     </footer>
 
+    <script>
+        // FUNZIONE PER APRIRE / CHIUDERE IL FORM DI ACQUISTO (BUY HUB)
+        function toggleBuyHub() {
+            const hub = document.getElementById('buyHub');
+            const btn = document.getElementById('buyBtn');
+            hub.classList.toggle('active');
+            if(hub.classList.contains('active')) {
+                hub.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // GENERAZIONE E PRECOMPILAZIONE EMAIL PER MIRKO CABRAS ALL'INVIO DEL FORM
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const note = document.getElementById('userNote').value;
+            const targetOwnerMail = "mirkocabras14@gmail.com";
+            
+            const subject = encodeURIComponent("Richiesta di Preordine Anticipato — DOXA Core Premium");
+            const body = encodeURIComponent(
+                "Gentile Team di Doxa,\n\n" +
+                "Desidero richiedere l'acquisto anticipato del dispositivo Doxa Core Premium Edition.\n\n" +
+                "Dettagli Utente per Contatto:\n" +
+                "- Email di riferimento: " + email + "\n\n" +
+                "Note aggiuntive dell'acquirente:\n" +
+                note + "\n\n" +
+                "In attesa di istruzioni per procedere con il pagamento.\n" +
+                "Cordiali saluti."
+            );
+            
+            // Reindirizzamento mail client nativo
+            window.location.href = `mailto:${targetOwnerMail}?subject=${subject}&body=${body}`;
+        }
+
+        // FAQS INTERACTIVE ACCORDION LOCK
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.faq-content');
+            
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = "0px";
+            }
+        }
+
+        // EFFETTO 3D TILT INTERATTIVO SULLA CARD DEL PRODOTTO
+        const card = document.getElementById('tiltCard');
+        if (card && window.innerWidth > 1024) {
+            card.parentElement.addEventListener('mousemove', (e) => {
+                const box = card.getBoundingClientRect();
+                const x = e.clientX - box.left - (box.width / 2);
+                const y = e.clientY - box.top - (box.height / 2);
+                
+                // Moltiplicatori di inclinazione assiale controllati
+                const factorX = (y / (box.height / 2)) * -12; 
+                const factorY = (x / (box.width / 2)) * 14;
+                
+                card.style.transform = `rotateX(${factorX + 10}deg) rotateY(${factorY - 14}deg) scale3d(1.03, 1.03, 1.03)`;
+                card.style.boxShadow = `${-factorY * 2}px ${factorX * 2}px 65px rgba(100, 255, 218, 0.25)`;
+            });
+
+            card.parentElement.addEventListener('mouseleave', () => {
+                card.style.transform = `rotateX(10deg) rotateY(-14deg) rotateZ(1deg)`;
+                card.style.boxShadow = `0 45px 85px rgba(0, 0, 0, 0.6)`;
+            });
+        }
+
+        // SCROLL OBSERVER PER L'ANIMAZIONE DELLE BARRE DELLA ROADMAP E DEI NAV LINKS
+        const observerOptions = { threshold: 0.2 };
+        const roadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.progress-fill');
+                    fills.forEach(fill => {
+                        fill.style.width = fill.getAttribute('data-progress');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const roadSection = document.getElementById('roadmapSection');
+        if(roadSection) roadObserver.observe(roadSection);
+
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('nav ul li a');
+            
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 200;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+                
+                if(top >= offset && top < offset + height) {
+                    navLinks.forEach(links => {
+                        links.classList.remove('active');
+                        const targetLink = document.querySelector('nav ul li a[href*=' + id + ']');
+                        if(targetLink) targetLink.classList.add('active');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
