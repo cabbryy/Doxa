@@ -1,6 +1,16 @@
+Ecco il codice sorgente completo, aggiornato e rifinito.
+
+Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro JavaScript e CSS a tema *Dark-Tech*. Ora, cliccando su una delle due immagini (quella della sezione Hardware o quella della sezione Prodotto 3D), si aprirà una schermata ingrandita a schermo intero con:
+
+1. Un contorno illuminato con il tipico **glow neon verde/azzurro** coerente con lo stile del sito.
+2. Un'animazione di entrata fluida (*fade-in* e *scale-up*).
+3. Una **X rossa circolare** in alto a destra per chiudere la visualizzazione in scala (è possibile chiudere il box anche cliccando in un punto qualsiasi dello sfondo scuro fuori dall'immagine).
+4. Le frasi corte e d'impatto personalizzate direttamente per te e Alessandro nella sezione della Roadmap.
+
+```html
 <!DOCTYPE html>
 <html lang="it">
-<head>
+<head <link rel="icon" type="image/png" href="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png">>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doxa — Mappamondo Emotivo | Official Interactive Experience</title>
@@ -76,7 +86,7 @@
         }
 
         /* ==========================================================================
-           LOGOTIPO INTEGRATO CON URL REALE
+           LOGOTIPO INTEGRATO
            ========================================================================== */
         .logo-box {
             display: flex;
@@ -503,7 +513,7 @@
         }
 
         /* ==========================================================================
-           HARDWARE FRAME & GRAPHICS
+           HARDWARE FRAME & GRAPHICS (CON IMMAGINE ZOOMABILE)
            ========================================================================== */
         .graphic-wrapper {
             position: relative;
@@ -522,6 +532,7 @@
             background-color: #060b19;
             opacity: 0.85;
             transition: all 0.5s ease;
+            cursor: zoom-in; /* Indica che è cliccabile per lo zoom */
         }
 
         .graphic-wrapper:hover img {
@@ -625,7 +636,7 @@
         .led-status.red { color: var(--accent-red); }
 
         /* ==========================================================================
-           VETRINA PRODOTTO INTERATTIVA 3D (ZANUTTA-CABRAS SPEC)
+           VETRINA PRODOTTO INTERATTIVA 3D
            ========================================================================== */
         .product-showcase {
             background: radial-gradient(circle at 50% 50%, #0c152b 0%, var(--bg-main) 80%);
@@ -641,7 +652,6 @@
             position: relative;
         }
 
-        /* Card 3D Tilt gestita via JS */
         .display-card-3d {
             width: 100%;
             max-width: 460px;
@@ -660,7 +670,7 @@
             overflow: hidden;
             background: #02040a;
             position: relative;
-            transform: translateZ(45px); /* Notevole effetto di stacco spaziale */
+            transform: translateZ(45px); 
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 20px 45px rgba(0,0,0,0.6);
         }
@@ -671,6 +681,7 @@
             display: block;
             object-fit: cover;
             filter: brightness(0.95) contrast(1.05);
+            cursor: zoom-in; /* Indica che è cliccabile per lo zoom */
         }
 
         .floating-tech-tag {
@@ -723,7 +734,7 @@
         }
 
         /* ==========================================================================
-           IPOTETICA SEZIONE DI ACQUISTO (BUY HUB FORM)
+           SEZIONE DI ACQUISTO (BUY HUB FORM)
            ========================================================================== */
         .buy-hub-section {
             max-height: 0;
@@ -799,7 +810,7 @@
         }
 
         /* ==========================================================================
-           ROADMAP FUTURE VISION
+           ROADMAP & TESTIMONIALS (CON FRASI CORTE OWNER)
            ========================================================================== */
         .future-vision-container {
             margin-top: 90px;
@@ -861,13 +872,10 @@
             height: 100%;
             background: linear-gradient(90deg, var(--accent-green), #00f0ff);
             border-radius: 3px;
-            width: 0; /* Animata via JS all'attivazione */
+            width: 0; 
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ==========================================================================
-           TESTIMONIALS & SOCIAL PROOF (NOVITÀ AGGIUNTA)
-           ========================================================================== */
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -911,7 +919,7 @@
         .author-info p { font-family: var(--font-tech); font-size: 11px; color: var(--accent-yellow); }
 
         /* ==========================================================================
-           FAQ ACCORDION COMPONENT (NOVITÀ AGGIUNTA)
+           FAQ ACCORDION COMPONENT
            ========================================================================== */
         .faq-container {
             max-width: 850px;
@@ -968,7 +976,7 @@
         }
 
         /* ==========================================================================
-           TEAM SECTION (RUOLI INVERTITI HARDWARE/CODING)
+           TEAM SECTION
            ========================================================================== */
         .team-layout {
             display: grid;
@@ -1030,6 +1038,81 @@
         .profile-node.historical .node-info p { color: var(--text-muted); }
 
         /* ==========================================================================
+           SCHERMATA INTERATTIVA DI ZOOM IMMAGINI (LIGHTBOX COMPONENT) - NOVITÀ
+           ========================================================================== */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-wrapper {
+            position: relative;
+            max-width: 85%;
+            max-height: 80%;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+
+        .lightbox-overlay.active .lightbox-wrapper {
+            transform: scale(1);
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            border-radius: 12px;
+            object-fit: contain;
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 0 40px rgba(100, 255, 218, 0.4);
+            background: #060b19;
+        }
+
+        /* Bottone X di chiusura circolare rosso */
+        .lightbox-close-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 44px;
+            height: 44px;
+            background-color: var(--accent-red);
+            border: 2px solid var(--text-main);
+            color: var(--text-main);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 59, 59, 0.5);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 2100;
+        }
+
+        .lightbox-close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            background-color: #d62828;
+        }
+
+        /* ==========================================================================
            FOOTER STYLING
            ========================================================================== */
         footer {
@@ -1056,6 +1139,7 @@
             header { padding: 15px 5%; }
             nav ul { display: none; }
             .display-card-3d { transform: none !important; }
+            .lightbox-close-btn { top: -15px; right: -15px; width: 38px; height: 38px; font-size: 14px; }
         }
     </style>
 </head>
@@ -1104,10 +1188,10 @@
             <div>
                 <div class="presentation-card">
                     <div class="quote-block">
-                        "Come reinterpretare un elemento d'arredo comune e caricarlo di coscienza collettiva globale?"
+                        "Come reinterpretare un elemento d'arredo comune e caricarlo di coscienza collective globale?"
                     </div>
                     <p class="text-block-p">
-                        Doxa nasce durante le sessioni d'aula del corso di Interaction Design, stimolato dall'analisi degli oggetti statici del nostro quotidiano. L'ispezione si è focalizzata su una **vecchia lampadina sferica**, storicamente usata solo per fare luce in camera. L'abbiamo svuotata della sua funzione passiva per tramutarla in un mappamondo parlante.
+                        Doxa nasce durante le sessioni d'aula del corso di Interaction Design, stimolato dall'analisi degli oggetti statici del nostro quotidiano. L'ispezione si è focalizzata su una **vecchia lampadina sferica**, storicamente usata solo per fare luce in camera. L'abbiamo svuotata della sua função passiva per tramutarla in un mappamondo parlante.
                     </p>
                 </div>
             </div>
@@ -1203,7 +1287,7 @@
         </div>
         <div class="grid-2">
             <div class="graphic-wrapper">
-                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa">
+                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa" class="zoomable-image">
                 <div class="graphic-details">
                     <span class="tech-badge">PROTOTIPO SPERIMENTALE V1.0</span>
                     <p style="font-size:14px; color: var(--text-muted);">Vista della calotta inferiore con rialzo stabilizzato per il cable-management logico.</p>
@@ -1212,7 +1296,7 @@
             <div>
                 <h3 style="font-family: var(--font-title); font-size: 26px; margin-bottom: 25px; text-transform: uppercase;">Problem Solving & Soluzioni Applicate</h3>
                 <p class="text-block-p" style="margin-bottom: 25px;">
-                    Durante la fase di assemblaggio del prototipo abbiamo isolato e superato criticità strutturali importanti, documentando ogni soluzione tecnica per garantire pulizia ed efficienza:
+                    Durante la phase di assemblaggio del prototipo abbiamo isolato e superato criticità strutturali importanti, documentando ogni soluzione tecnica per garantire pulizia ed efficienza:
                 </p>
                 <ul class="bullet-tech">
                     <li><i class="fa-solid fa-microchip"></i> <strong>Piattaforma Arduino:</strong> Un microcontrollore centrale campiona gli ingressi del joystick traducendoli istantaneamente nelle matrici di commutazione dei LED.</li>
@@ -1279,7 +1363,7 @@
             <div class="stage-view-3d">
                 <div class="display-card-3d" id="tiltCard">
                     <div class="image-render-container">
-                        <img src="https://i.ibb.co/PsVcysbL/Doxa-ES.png" alt="Doxa Premium Pro - Visione Tridimensionale Interattiva" class="product-main-img">
+                        <img src="https://i.ibb.co/PsVcysbL/Doxa-ES.png" alt="Doxa Premium Pro - Visione Tridimensionale Interattiva" class="product-main-img zoomable-image">
                     </div>
                     <div class="floating-tech-tag"><i class="fa-solid fa-circle-nodes"></i> PRE-PRODUCTION HUB</div>
                 </div>
@@ -1333,32 +1417,30 @@
             <div class="future-grid">
                 <div>
                     <p class="text-block-p" style="font-size: 17px; margin-bottom: 20px; color: var(--text-main);">
-                        Doxa non si ferma allo stato di prototipo accademico. Il sistema è stato concepito con una struttura modulare flessibile pronta a scalare verso scenari di data visualization industriale e analisi geopolitica di livello enterprise.
-                    </p>
-                    <p class="text-block-p">
-                        Grazie all'espansione della memoria logica e all'integrazione di moduli di connettività wireless avanzati, la roadmap prevede il passaggio dalla visualizzazione per macro-aree a un monitoraggio atomico ad altissima fedeltà.
+                        Doxa non si ferma allo stato di prototipo accademico. Il sistema è stato concepito con una struttura modulare flessibile pronta a scalare verso scenari di data visualization industriale.
                     </p>
                     
                     <div class="testimonial-grid">
-    <div class="testimonial-card">
-        <p class="testimonial-text">"Ottimizzando il codice Arduino, abbiamo trasformato freddi dati numerici in impulsi cromatici ed emotivi fluidi."</p>
-        <div class="testimonial-author">
-            <div class="author-info">
-                <h5>Mirko Cabras</h5>
-                <p>Lead Interaction Developer</p>
-            </div>
-        </div>
-    </div>
-    <div class="testimonial-card">
-        <p class="testimonial-text">"Progettando da zero il tunnel assiale rotatorio, abbiamo eliminato ogni torsione dei cavi, dando stabilità al globo."</p>
-        <div class="testimonial-author">
-            <div class="author-info">
-                <h5>Alessandro Zanutta</h5>
-                <p>Lead Hardware Architect</p>
-            </div>
-        </div>
-    </div>
-</div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Ottimizzando il codice Arduino, abbiamo trasformato freddi dati numerici in impulsi cromatici ed emotivi fluidi."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h5>Mirko Cabras</h5>
+                                    <p>Lead Interaction Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Progettando da zero il tunnel assiale rotatorio, abbiamo eliminato ogni torsione dei cavi, dando stabilità al globo."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h5>Alessandro Zanutta</h5>
+                                    <p>Lead Hardware Architect</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="roadmap-list" id="roadmapSection">
                     <div class="roadmap-step">
@@ -1461,6 +1543,13 @@
         </div>
     </section>
 
+    <div class="lightbox-overlay" id="imageLightbox">
+        <div class="lightbox-wrapper">
+            <button class="lightbox-close-btn" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+            <img src="" alt="Doxa Zoom View" class="lightbox-img" id="lightboxMainImage">
+        </div>
+    </div>
+
     <footer>
         <div class="footer-logo-center">
             <img src="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png" alt="Doxa Logo Footer" class="footer-logo-img">
@@ -1470,10 +1559,49 @@
     </footer>
 
     <script>
+        // LOGICA PER IL LIGHTBOX (INGRANDIMENTO DELLE IMMAGINI)
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxMainImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        // Aggancia l'evento di click su ogni immagine zoomabile
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src; // Copia l'URL dell'immagine cliccata
+                lightboxImg.alt = img.alt; // Copia il testo alternativo
+                lightbox.classList.add('active'); // Mostra l'overlay
+                document.body.style.overflow = 'hidden'; // Blocca lo scroll del sito sotto lo zoom
+            });
+        });
+
+        // Funzione per chiudere lo zoom
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Riattiva lo scroll della pagina
+        }
+
+        // Chiudi cliccando sulla X rossa
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        // Chiudi cliccando sullo sfondo scuro esterno
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Chiudi premendo il tasto ESC sulla tastiera
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+
         // FUNZIONE PER APRIRE / CHIUDERE IL FORM DI ACQUISTO (BUY HUB)
         function toggleBuyHub() {
             const hub = document.getElementById('buyHub');
-            const btn = document.getElementById('buyBtn');
             hub.classList.toggle('active');
             if(hub.classList.contains('active')) {
                 hub.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1499,11 +1627,10 @@
                 "Cordiali saluti."
             );
             
-            // Reindirizzamento mail client nativo
             window.location.href = `mailto:${targetOwnerMail}?subject=${subject}&body=${body}`;
         }
 
-        // FAQS INTERACTIVE ACCORDION LOCK
+        // FAQS INTERACTIVE ACCORDION
         function toggleFaq(button) {
             const item = button.parentElement;
             const content = item.querySelector('.faq-content');
@@ -1524,7 +1651,6 @@
                 const x = e.clientX - box.left - (box.width / 2);
                 const y = e.clientY - box.top - (box.height / 2);
                 
-                // Moltiplicatori di inclinazione assiale controllati
                 const factorX = (y / (box.height / 2)) * -12; 
                 const factorY = (x / (box.width / 2)) * 14;
                 
@@ -1538,7 +1664,7 @@
             });
         }
 
-        // SCROLL OBSERVER PER L'ANIMAZIONE DELLE BARRE DELLA ROADMAP E DEI NAV LINKS
+        // SCROLL OBSERVER PER LE ANIMAZIONI DELLE BARRE DI PROGRESSO E DEI RECAP DEI NAV LINKS
         const observerOptions = { threshold: 0.2 };
         const roadObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1576,3 +1702,5 @@
     </script>
 </body>
 </html>
+
+```
