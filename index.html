@@ -1,16 +1,7 @@
-Ecco il codice sorgente completo, aggiornato e rifinito.
-
-Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro JavaScript e CSS a tema *Dark-Tech*. Ora, cliccando su una delle due immagini (quella della sezione Hardware o quella della sezione Prodotto 3D), si aprirà una schermata ingrandita a schermo intero con:
-
-1. Un contorno illuminato con il tipico **glow neon verde/azzurro** coerente con lo stile del sito.
-2. Un'animazione di entrata fluida (*fade-in* e *scale-up*).
-3. Una **X rossa circolare** in alto a destra per chiudere la visualizzazione in scala (è possibile chiudere il box anche cliccando in un punto qualsiasi dello sfondo scuro fuori dall'immagine).
-4. Le frasi corte e d'impatto personalizzate direttamente per te e Alessandro nella sezione della Roadmap.
-
-```html
 <!DOCTYPE html>
 <html lang="it">
-<head <link rel="icon" type="image/png" href="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png">>
+<head>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doxa — Mappamondo Emotivo | Official Interactive Experience</title>
@@ -525,6 +516,13 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             height: 480px;
         }
 
+       
+      .hardware-images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
         .graphic-wrapper img {
             width: 100%;
             height: 100%;
@@ -532,7 +530,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             background-color: #060b19;
             opacity: 0.85;
             transition: all 0.5s ease;
-            cursor: zoom-in; /* Indica che è cliccabile per lo zoom */
+            cursor: zoom-in;
         }
 
         .graphic-wrapper:hover img {
@@ -681,7 +679,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             display: block;
             object-fit: cover;
             filter: brightness(0.95) contrast(1.05);
-            cursor: zoom-in; /* Indica che è cliccabile per lo zoom */
+            cursor: zoom-in;
         }
 
         .floating-tech-tag {
@@ -919,7 +917,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         .author-info p { font-family: var(--font-tech); font-size: 11px; color: var(--accent-yellow); }
 
         /* ==========================================================================
-           FAQ ACCORDION COMPONENT
+           FAQ Component
            ========================================================================== */
         .faq-container {
             max-width: 850px;
@@ -1038,7 +1036,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         .profile-node.historical .node-info p { color: var(--text-muted); }
 
         /* ==========================================================================
-           SCHERMATA INTERATTIVA DI ZOOM IMMAGINI (LIGHTBOX COMPONENT) - NOVITÀ
+           SCHERMATA INTERATTIVA DI ZOOM IMMAGINI (LIGHTBOX COMPONENT)
            ========================================================================== */
         .lightbox-overlay {
             position: fixed;
@@ -1086,7 +1084,6 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             background: #060b19;
         }
 
-        /* Bottone X di chiusura circolare rosso */
         .lightbox-close-btn {
             position: absolute;
             top: -20px;
@@ -1130,16 +1127,31 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         .footer-tech-note { font-family: var(--font-tech); font-size: 11px; color: rgba(148, 163, 184, 0.3); margin-top: 12px; }
 
         /* ==========================================================================
-           RESPONSIVE INTERFACE
+           RESPONSIVE INTERFACE & MOBILE PERFORMANCE UPGRADES
            ========================================================================== */
         @media (max-width: 1024px) {
-            .grid-2, .future-grid, .testimonial-grid { grid-template-columns: 1fr; gap: 50px; }
-            .feature-cards, .team-layout { grid-template-columns: 1fr; }
-            .hero-inner h1 { font-size: 52px; }
+            section { padding: 80px 5%; }
+            .grid-2, .future-grid, .testimonial-grid { grid-template-columns: 1fr; gap: 40px; }
+            .feature-cards, .team-layout { grid-template-columns: 1fr; gap: 20px; }
+            .hero-inner h1 { font-size: 48px; }
+            .hero-desc { font-size: 18px; }
             header { padding: 15px 5%; }
             nav ul { display: none; }
-            .display-card-3d { transform: none !important; }
+            .display-card-3d { transform: none !important; margin: 0 auto; }
             .lightbox-close-btn { top: -15px; right: -15px; width: 38px; height: 38px; font-size: 14px; }
+            .graphic-wrapper { height: 320px; }
+            .metric-row { gap: 10px; }
+            .metric-box h3 { font-size: 22px; }
+            .metric-box p { font-size: 10px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-inner h1 { font-size: 36px; }
+            .btn-group { flex-direction: column; gap: 12px; width: 100%; }
+            .btn { width: 100%; padding: 14px 20px; }
+            .product-price { font-size: 36px; justify-content: center; }
+            .presentation-card { padding: 25px; }
+            .quote-block { font-size: 18px; padding-left: 15px; }
         }
     </style>
 </head>
@@ -1148,7 +1160,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
     <header>
         <a href="#home" class="logo-box">
             <img src="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png" alt="Doxa Logo" class="logo-img">
-            <div class="logo-title">DOXA<span>.</span></div>
+            <div class="logo-title">DO<span>XA</span></div>
         </a>
         <nav>
             <ul>
@@ -1169,12 +1181,12 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <div class="hero-logo-container">
                 <img src="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png" alt="Doxa Logo Globale" class="hero-logo-img">
             </div>
-            <div class="hero-tagline">Interaction Design Project</div>
+            <div class="hero-tagline">Progetto di Interaction Design</div>
             <h1>Lo stato del mondo in uno <span>sguardo</span></h1>
-            <p class="hero-desc">Doxa converte metriche macroeconomiche e geopolitiche in impulsi luminosi ed emotivi. Un connubio perfetto tra Data Visualization e Physical Computing.</p>
+            <p class="hero-desc">Doxa trasforma i dati economici e geopolitici in segnali luminosi ed emotivi. Un modo semplice e immediato per visualizzare le informazioni attraverso un oggetto fisico.</p>
             <div class="btn-group">
                 <a href="#presentazione" class="btn btn-primary">Scopri il Progetto</a>
-                <a href="#prodotto" class="btn btn-secondary"><i class="fa-solid fa-store"></i> Preordina Doxa Core</a>
+                <a href="#prodotto" class="btn btn-secondary"><i class="fa-solid fa-store"></i> Preordina Doxa V2.0</a>
             </div>
         </div>
     </section>
@@ -1188,34 +1200,34 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <div>
                 <div class="presentation-card">
                     <div class="quote-block">
-                        "Come reinterpretare un elemento d'arredo comune e caricarlo di coscienza collective globale?"
+                        "Come possiamo trasformare un oggetto comune in un elemento capace di raccontare la situazione globale?"
                     </div>
                     <p class="text-block-p">
-                        Doxa nasce durante le sessioni d'aula del corso di Interaction Design, stimolato dall'analisi degli oggetti statici del nostro quotidiano. L'ispezione si è focalizzata su una **vecchia lampadina sferica**, storicamente usata solo per fare luce in camera. L'abbiamo svuotata della sua função passiva per tramutarla in un mappamondo parlante.
+                        Doxa nasce come progetto tecnologico che parti da un semplice mappamondoo e l'abbiamo trasformato in un mappamondo intelligente che comunica con l'utente.
                     </p>
                 </div>
             </div>
             <div>
-                <p class="text-highlight-title">Interazione Fisica Emotiva</p>
+                <p class="text-highlight-title">Un'Interazione Semplice ed Emotiva</p>
                 <p class="text-block-p" style="margin-bottom: 25px;">
-                    Integrando all'interno del guscio trasparente una matrice ordinata di LED RGB indirizzabili collegati a un controller joystick sulla base prototipale, l'utente ha la facoltà di navigare le coordinate del globo terrestre.
+                    All'interno della mappamondo abbiamo inserito una serie di LED RGB colorati. Muovendo il joystick posizionato sulla base del dispositivo, puoi scegliere una coordinata sulla Terra da analizzare.
                 </p>
                 <p class="text-block-p">
-                    Il dispositivo risponde istantaneamente interrogando database interni e proiettando all'esterno non una semplice luce, ma un vero e proprio "giudizio visivo" sulla stabilità dell'area selezionata.
+                    Il sistema consulta subito le informazioni salvate al suo interno e risponde proiettando una luce colorata. Questa luce rappresenta una valutazione immediata sulla stabilità e il benessere dell'area che hai scelto.
                 </p>
                 
                 <div class="metric-row">
                     <div class="metric-box">
                         <h3>3</h3>
-                        <p>Fasce di Criticità</p>
+                        <p>Livelli di Criticità</p>
                     </div>
                     <div class="metric-box">
-                        <h3>100%</h3>
-                        <p>Cablaggio Assiale</p>
+                        <h3>90%</h3>
+                        <p>Cavi Ordinati</p>
                     </div>
                     <div class="metric-box">
-                        <h3>Arduino</h3>
-                        <p>Core Logic</p>
+                        <h3>2 Arduino</h3>
+                        <p>Logica di Controllo</p>
                     </div>
                 </div>
             </div>
@@ -1230,32 +1242,32 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         <div class="grid-2">
             <div>
                 <p class="text-block-p" style="font-size: 19px; margin-bottom: 25px; font-weight: 400; color: var(--text-main);">
-                    Doxa elabora in tempo reale tre indicatori cardine per ogni macro-area geografica: il **Prodotto Interno Lordo (PIL)**, l'**Indice di Sviluppo Umano (ISU)** e lo **Stato di Benessere Sanitario**.
+                    Doxa elabora tre dati importanti per ogni zona del mondo: il Prodotto Interno Lordo (PIL), l'Indice di Sviluppo Umano (ISU) e il *Livello della Sanità.
                 </p>
                 <p class="text-block-p">
-                    Questi dati, complessi da interpretare in forma tabellare, vengono tradotti in una risposta cromatica immediata basata sulle tre lunghezze d'onda del brand, capaci di attivare una reazione psicologica istantanea nell'osservatore.
+                    Questi dati, spesso difficili da capire dentro una tabella, vengono tradotti in tre colori principali. In questo modo, chi guarda la lampada capisce al volo la situazione del paese selezionato.
                 </p>
             </div>
             <div class="color-list">
                 <div class="color-item green">
                     <div class="status-dot" style="background-color: var(--accent-green);"></div>
                     <div>
-                        <strong class="color-title-strong">VERDE — STABILITÀ / BENESSERE</strong>
-                        <p class="color-desc-p">Indica territori caratterizzati da elevata aspettativa di vita, tassi di scolarizzazione massimi e stabilità istituzionale.</p>
+                        <strong class="color-title-strong">VERDE — STABILITÀ E BENESSERE</strong>
+                        <p class="color-desc-p">Indica paesi con un'ottima aspettativa di vita, scuole efficienti e istituzioni stabili.</p>
                     </div>
                 </div>
                 <div class="color-item yellow">
                     <div class="status-dot" style="background-color: var(--accent-yellow);"></div>
                     <div>
                         <strong class="color-title-strong">GIALLO — ECONOMIE IN TRANSIZIONE</strong>
-                        <p class="color-desc-p">Evidenzia aree in via di sviluppo industriale affette da squilibri di welfare localizzati o mercati ad alta volatilità.</p>
+                        <p class="color-desc-p">Indica zone in via di sviluppo che presentano alcune disuguaglianze sociali o mercati poco stabili.</p>
                     </div>
                 </div>
                 <div class="color-item red">
                     <div class="status-dot" style="background-color: var(--accent-red);"></div>
                     <div>
                         <strong class="color-title-strong">ROSSO — CRITICITÀ ELEVATA</strong>
-                        <p class="color-desc-p">Segnala scenari di crisi umanitaria attiva, conflitti geopolitici interni, iperinflazione o pesanti emergenze climatiche.</p>
+                        <p class="color-desc-p">Segnala situazioni di emergenza umanitaria, difficoltà economiche gravi, conflitti o problemi climatici.</p>
                     </div>
                 </div>
             </div>
@@ -1264,18 +1276,18 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         <div class="feature-cards">
             <div class="card feat-card">
                 <div class="feat-icon"><i class="fa-solid fa-gamepad"></i></div>
-                <h4>Tracciamento Analogico</h4>
-                <p>La navigazione cartografica è gestita da un joystick analogico a due assi posizionato simmetricamente per un feedback fluido.</p>
+                <h4>Controllo con Joystick</h4>
+                <p>Puoi muoverti sulla mappa della Terra usando un pratico joystick analogico a due assi per un'esperienza fluida e comoda.</p>
             </div>
             <div class="card feat-card">
                 <div class="feat-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h4>Doppio Output Informativo</h4>
-                <p>Mentre i LED proiettano la percezione cromatico-emotiva, il display integrato alla base mostra la verità analitica dei dati scientifici.</p>
+                <h4>Doppio Schermo</h4>
+                <p>Mentre la luce della sfera mostra l'impatto emotivo del colore, un piccolo schermo sulla base mostra i dati scientifici precisi.</p>
             </div>
             <div class="card feat-card">
-                <div class="feat-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                <h4>Architettura Scalabile</h4>
-                <p>Il sistema software è pronto per un'espansione totale tramite Shift Register, permettendo in futuro di mappare singole nazioni.</p>
+                <div class="fa-solid fa-diagram-project feat-icon"></div>
+                <h4>Pronto al Futuro</h4>
+                <p>Il codice è scritto per espandersi facilmente: in futuro potremo aggiungere chip per mappare singolarmente ogni singola nazione.</p>
             </div>
         </div>
     </section>
@@ -1283,26 +1295,33 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
     <section id="hardware">
         <div class="section-header">
             <span class="section-index">03 / ARCHITECTURE</span>
-            <h2>Ingegnerizzazione Hardware & Sviluppo Arduino</h2>
+            <h2>Ingegnerizzazione Hardware & Sviluppo Prototipo 1.0</h2>
         </div>
         <div class="grid-2">
-            <div class="graphic-wrapper">
-                <img src="https://i.postimg.cc/fWHY0xqz/Doxa-Logo-(2).png" alt="Cablaggio interno Arduino e Breadboard di Doxa" class="zoomable-image">
-                <div class="graphic-details">
-                    <span class="tech-badge">PROTOTIPO SPERIMENTALE V1.0</span>
-                    <p style="font-size:14px; color: var(--text-muted);">Vista della calotta inferiore con rialzo stabilizzato per il cable-management logico.</p>
+            <div class="hardware-images-grid">
+                <div class="graphic-wrapper">
+                    <img src="https://i.ibb.co/1tmzpTry/image.png" alt="Schema strutturale e architettura hardware Doxa" class="zoomable-image">
+                    <div class="graphic-details">
+                        <span class="tech-badge">PROTOTIPO REALE V1.0</span>
+                    </div>
+                </div>
+                <div class="graphic-wrapper">
+                    <img src="https://i.ibb.co/wF0bnYBM/image.png" alt="Cablaggio interno e circuiti reali Prototipo 1.0" class="zoomable-image">
+                    <div class="graphic-details">
+                        <span class="tech-badge">ARCHITETTURA HARDWARE</span>
+                    </div>
                 </div>
             </div>
             <div>
-                <h3 style="font-family: var(--font-title); font-size: 26px; margin-bottom: 25px; text-transform: uppercase;">Problem Solving & Soluzioni Applicate</h3>
+                <h3 style="font-family: var(--font-title); font-size: 26px; margin-bottom: 25px; text-transform: uppercase;">Problemi Risolti & Soluzioni</h3>
                 <p class="text-block-p" style="margin-bottom: 25px;">
-                    Durante la phase di assemblaggio del prototipo abbiamo isolato e superato criticità strutturali importanti, documentando ogni soluzione tecnica per garantire pulizia ed efficienza:
+                    Durante la costruzione del prototipo reale abbiamo affrontato e superato diverse sfide pratiche, organizzando il lavoro per renderlo pulito e sicuro:
                 </p>
                 <ul class="bullet-tech">
-                    <li><i class="fa-solid fa-microchip"></i> <strong>Piattaforma Arduino:</strong> Un microcontrollore centrale campiona gli ingressi del joystick traducendoli istantaneamente nelle matrici di commutazione dei LED.</li>
-                    <li><i class="fa-solid fa-arrows-spin"></i> <strong>Tunnel Assiale Rotatorio:</strong> Per ovviare all'aggrovigliamento dei fili interni dovuto alla rotazione del globo, abbiamo smontato l'attacco originale, facendo scorrere tutti i cavi all'interno di un condotto flessibile verticale.</li>
-                    <li><i class="fa-solid fa-hashtag"></i> <strong>Codifica Rigida dei Cavi:</strong> Ogni conduttore sulla breadboard rialzata è stato numerato singolarmente per massimizzare la velocità di manutenzione hardware e l'ottimizzazione del codice.</li>
-                    <li><i class="fa-solid fa-lightbulb"></i> <strong>Alloggiamenti Ottici Custom:</strong> Abbiamo progettato degli appoggi dedicati per i diodi LED, bloccandoli in asse senza l'uso di colle a caldo volatili, preservando la trasparenza del guscio.</li>
+                    <li><i class="fa-solid fa-microchip"></i> <strong>Scheda Arduino:</strong> Il microcontrollore centrale legge i movimenti del joystick e accende all'istante i LED corrispondenti.</li>
+                    <li><i class="fa-solid fa-arrows-spin"></i> <strong>Passaggio Cavi Centrale:</strong> Per evitare che i fili si aggrovigliassero quando il mappamondo girava, abbiamo creato un canale verticale flessibile dove far passare i collegamenti.</li>
+                    <li><i class="fa-solid fa-hashtag"></i> <strong>Cavi Numerati:</strong> Ogni filo sulla scheda dei circuiti è stato contrassegnato con un numero per fare modifiche e riparazioni in pochi secondi.</li>
+                    <li><i class="fa-solid fa-lightbulb"></i> <strong>Supporti per i LED:</strong> Abbiamo progettato degli alloggiamenti su misura per i LED. In questo modo rimangono fermi da soli senza usare colle che avrebbero rovinato la trasparenza del vetro.</li>
                 </ul>
             </div>
         </div>
@@ -1314,40 +1333,40 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <h2>Database Interno & Mappatura Aree</h2>
         </div>
         <p class="text-block-p" style="margin-bottom: 35px; font-size: 17px; max-width: 850px;">
-            La tabella seguente illustra la segmentazione logica implementata nel firmware Arduino. Ciascuna macro-area associa i dati statistici globali all'output visivo corrispondente sul prototipo.
+            Questa tabella mostra come abbiamo organizzato le informazioni dentro la memoria di Arduino. Ogni macro-area collega i dati statistici al colore corrispondente sul mappamondo.
         </p>
         <div class="matrix-container">
             <table>
                 <thead>
                     <tr>
                         <th>Macro-Area Geografica</th>
-                        <th>Stato Cromatico LED</th>
-                        <th>Volume Popolazione</th>
-                        <th>PIL Medio Stimato</th>
-                        <th>Dettaglio Analitico Display</th>
+                        <th>Colore del LED</th>
+                        <th>Popolazione</th>
+                        <th>PIL Medio</th>
+                        <th>Informazioni sullo Schermo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="td-geo-area">Europa / Nord America</td>
-                        <td><span class="led-status green">● VERDE (Welfare)</span></td>
+                        <td><span class="led-status green">● VERDE (Benessere)</span></td>
                         <td>740 Milioni</td>
-                        <td>$ 17 Trilioni</td>
-                        <td>Elevata protezione sociale, stabilità geopolitica, sistemi sanitari strutturati.</td>
+                        <td>$ 17 Mila Miliardi</td>
+                        <td>Buona protezione sociale, stabilità e ospedali ben organizzati.</td>
                     </tr>
                     <tr>
                         <td class="td-geo-area">Sud Asia / America Latina</td>
                         <td><span class="led-status yellow">● GIALLO (Transizione)</span></td>
                         <td>2 Miliardi</td>
-                        <td>$ 6 Trilioni</td>
-                        <td>Mercati in fortissima espansione, ma affetti da sproporzione nella ridistribuzione del reddito.</td>
+                        <td>$ 6 Mila Miliardi</td>
+                        <td>Mercati che crescono molto velocemente, ma con forti differenze di ricchezza tra le persone.</td>
                     </tr>
                     <tr>
                         <td class="td-geo-area">Sub-Sahara / Medio Oriente</td>
                         <td><span class="led-status red">● ROSSO (Criticità)</span></td>
                         <td>500 Milioni</td>
-                        <td>$ 3 Trilioni</td>
-                        <td>Emergenze geopolitiche attive, scarsità cronica di infrastrutture e vulnerabilità ecologica.</td>
+                        <td>$ 3 Mila Miliardi</td>
+                        <td>Problemi locali frequenti, mancanza di servizi base e territori a rischio climatico.</td>
                     </tr>
                 </tbody>
             </table>
@@ -1357,28 +1376,28 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
     <section id="prodotto" class="product-showcase">
         <div class="section-header">
             <span class="section-index">05 / EXCLUSIVE VITRINE</span>
-            <h2>Doxa Core Premium Edition</h2>
+            <h2>Doxa V2.0 Premium Edition (Concept Ipotetico)</h2>
         </div>
         <div class="grid-2">
             <div class="stage-view-3d">
                 <div class="display-card-3d" id="tiltCard">
                     <div class="image-render-container">
-                        <img src="https://i.ibb.co/PsVcysbL/Doxa-ES.png" alt="Doxa Premium Pro - Visione Tridimensionale Interattiva" class="product-main-img zoomable-image">
+                        <img src="https://i.ibb.co/PsVcysbL/Doxa-ES.png" alt="Doxa Premium Pro - Modello Virtuale 3D" class="product-main-img zoomable-image">
                     </div>
-                    <div class="floating-tech-tag"><i class="fa-solid fa-circle-nodes"></i> PRE-PRODUCTION HUB</div>
+                    <div class="floating-tech-tag"><i class="fa-solid fa-circle-nodes"></i> CONCEPT EVOLUTO V2.0</div>
                 </div>
             </div>
             <div>
-                <span class="badge-limited"><i class="fa-solid fa-crown"></i> Edizione Da Collezione Limitata</span>
-                <h3 style="font-family: var(--font-title); font-size: 36px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -0.5px;">Il Futuro dei Dati Esecutivi</h3>
+                <span class="badge-limited"><i class="fa-solid fa-crown"></i> Edizione da Collezione Limitata</span>
+                <h3 style="font-family: var(--font-title); font-size: 36px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -0.5px;">IL FUTURO DI DOXA</h3>
                 <p class="text-block-p" style="margin-bottom: 20px;">
-                    Portati a casa la massima espressione fisica dell'Interaction Design. Questa edizione speciale di **Doxa** include il modulo sferico ad alta rifrazione, la docking station rifinita in tinta *Navy Tech* ad alta densità con display LCD diagnostici integrati alla base, selettore joystick analogico e alimentatore stabilizzato. 
+                    Scopri l'evoluzione del nostro progetto con l'ipotetica **Versione 2.0 AI**. Questa versione da produzione include un mappamondo 100% tecnologico, una base solida dal design scuro con schermo diagnostico integrato e un alimentatore di corrente dedicato.
                 </p>
                 <div class="product-price">
-                    <del>€ 149.00</del> € 89.<span>99</span>
+                    <del>€ 129.00</del> € 89.<span>99</span>
                 </div>
                 <button id="buyBtn" onclick="toggleBuyHub()" class="btn btn-primary style-btn" style="width: 100%; max-width: 400px; padding: 20px;">
-                    <i class="fa-solid fa-basket-shopping"></i> Preordina il Modello Esclusivo
+                    <i class="fa-solid fa-basket-shopping"></i> Preordina la Versione 2.0 Ipotetica
                 </button>
             </div>
         </div>
@@ -1387,23 +1406,23 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <div class="buy-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div>
-                        <h4><i class="fa-solid fa-paper-plane" style="color: var(--accent-green); margin-right: 10px;"></i> Richiesta di Preordine Anticipato</h4>
-                        <p>Compila il modulo sottostante. Il sistema configurerà la richiesta ufficiale indirizzandola direttamente ai fondatori del progetto.</p>
+                        <h4><i class="fa-solid fa-paper-plane" style="color: var(--accent-green); margin-right: 10px;"></i> Modulo di Richiesta Preordine</h4>
+                        <p>Compila i campi qui sotto. Riceveremo la tua richiesta direttamente sulle nostre caselle email personali.</p>
                     </div>
                     <button onclick="toggleBuyHub()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 20px;"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 
                 <form id="purchaseForm" onsubmit="handleFormSubmit(event)">
                     <div class="form-group">
-                        <label for="userEmail">Il tuo Indirizzo Email</label>
+                        <label for="userEmail">La tua Email</label>
                         <input type="email" id="userEmail" class="form-control" placeholder="esempio@dominio.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="userNote">Note d'Acquisto o Personalizzazioni Base</label>
-                        <textarea id="userNote" class="form-control" placeholder="Inserisci eventuali domande o specifiche per il tuo pezzo da collezione (es. numero seriale preferito, richieste hardware)..."></textarea>
+                        <label for="userNote">Note e richieste di personalizzazione</label>
+                        <textarea id="userNote" class="form-control" placeholder="Scrivi qui se hai domande sui componenti, richieste per la base o dettagli sul funzionamento..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background: var(--accent-green); color: #000; font-weight: 700; width: 100%;">
-                        <i class="fa-solid fa-envelope-open-text"></i> Invia Richiesta d'Acquisto all'Owner
+                        <i class="fa-solid fa-envelope-open-text"></i> Invia la Richiesta al Team
                     </button>
                 </form>
             </div>
@@ -1417,25 +1436,25 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <div class="future-grid">
                 <div>
                     <p class="text-block-p" style="font-size: 17px; margin-bottom: 20px; color: var(--text-main);">
-                        Doxa non si ferma allo stato di prototipo accademico. Il sistema è stato concepito con una struttura modulare flessibile pronta a scalare verso scenari di data visualization industriale.
+                        Doxa è pensato per crescere. Abbiamo progettato il sistema in moduli separati, così da poter aggiungere nuove funzioni in modo semplice nel corso del tempo.
                     </p>
                     
                     <div class="testimonial-grid">
                         <div class="testimonial-card">
-                            <p class="testimonial-text">"Ottimizzando il codice Arduino, abbiamo trasformato freddi dati numerici in impulsi cromatici ed emotivi fluidi."</p>
+                            <p class="testimonial-text">"Semplificando il codice di Arduino siamo riusciti a trasformare i numeri in colori in modo fluido e immediato."</p>
                             <div class="testimonial-author">
                                 <div class="author-info">
                                     <h5>Mirko Cabras</h5>
-                                    <p>Lead Interaction Developer</p>
+                                    <p>Sviluppatore Software</p>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-card">
-                            <p class="testimonial-text">"Progettando da zero il tunnel assiale rotatorio, abbiamo eliminato ogni torsione dei cavi, dando stabilità al globo."</p>
+                            <p class="testimonial-text">"Costruendo da zero il canale centrale per i fili abbiamo eliminato i nodi, rendendo il mappamondo solido."</p>
                             <div class="testimonial-author">
                                 <div class="author-info">
                                     <h5>Alessandro Zanutta</h5>
-                                    <p>Lead Hardware Architect</p>
+                                    <p>Progettista Hardware</p>
                                 </div>
                             </div>
                         </div>
@@ -1444,18 +1463,18 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
                 </div>
                 <div class="roadmap-list" id="roadmapSection">
                     <div class="roadmap-step">
-                        <h4>Mappatura 1:1 dei Singoli Stati <span>In Sviluppo</span></h4>
-                        <p>Sostituzione della matrice LED attuale con una griglia micro-LED indirizzabile tramite Shift Register seriali per isolare e illuminare singolarmente i confini di ciascuna nazione.</p>
+                        <h4>Mappa Dettagliata dei Singoli Stati <span>In Sviluppo</span></h4>
+                        <p>Vogliamo realizzare ogni territorio preciso e realistico all'interno dell'oled.</p>
                         <div class="tech-progress-bar"><div class="progress-fill" data-progress="85%"></div></div>
                     </div>
                     <div class="roadmap-step">
-                        <h4>Integrazione AI Sentiment Analysis <span>Pianificato</span></h4>
-                        <p>Integrazione di algoritmi predittivi per analizzare il sentiment dei social network e dei canali di news internazionali, mutando il colore del globo prima dei report macroeconomici ufficiali.</p>
+                        <h4>Analisi delle Notizie in Tempo Reale <span>Pianificato</span></h4>
+                        <p>Vogliamo inserire funzioni capaci di leggere i titoli dei telegiornali e dei social per cambiare colore prima dell'uscita dei dati ufficiali.</p>
                         <div class="tech-progress-bar"><div class="progress-fill" data-progress="60%"></div></div>
                     </div>
                     <div class="roadmap-step">
-                        <h4>Sincronizzazione Web API Real-Time <span>R&D Phase</span></h4>
-                        <p>Sostituzione del database statico memorizzato sulla ROM di Arduino con un modulo Wi-Fi ESP32 per interrogare costantemente le API della Banca Mondiale e dell'OMS.</p>
+                        <h4>Collegamento a Internet <span>Fase di Studio</span></h4>
+                        <p>Sostituiremo la memoria fissa di Arduino con una scheda Wi-Fi per scaricare i dati aggiornati direttamente dai siti dell'OMS e della Banca Mondiale.</p>
                         <div class="tech-progress-bar"><div class="progress-fill" data-progress="40%"></div></div>
                     </div>
                 </div>
@@ -1471,34 +1490,34 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         <div class="faq-container">
             <div class="faq-item">
                 <button class="faq-trigger" onclick="toggleFaq(this)">
-                    Come viene alimentato Doxa Core?
+                    Come si accende Doxa?
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="faq-content">
                     <div class="faq-content-inner">
-                        Doxa Core viene alimentato tramite un classico cavo USB-C incluso nella confezione che si collega direttamente alla docking station posteriore. Il consumo complessivo è ridotto al minimo grazie ai diodi LED RGB ad alta efficienza.
+                        Doxa si alimenta con due comuni cavi USB-C incluso nella confezione. Puoi collegarlo a un caricabatterie o al computer.
                     </div>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-trigger" onclick="toggleFaq(this)">
-                    Posso aggiornare i dati macroeconomici all'interno?
+                    I dati all'interno si possono aggiornare?
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="faq-content">
                     <div class="faq-content-inner">
-                        Certamente. Il modello Premium Edition dispone di una porta dati ausiliaria che permette di flashare e sovrascrivere il database interno di Arduino tramite una comoda interfaccia desktop open source fornita dopo il preordine.
+                        Sì. Il modello ha un ingresso per il computer che permette di cambiare i dati salvati dentro Arduino usando il nostro codice c++.
                     </div>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-trigger" onclick="toggleFaq(this)">
-                    Come funziona la spedizione dei modelli preordinati?
+                    Come funziona il collegamento dei due arduino?
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="faq-content">
                     <div class="faq-content-inner">
-                        I pezzi vengono assemblati a mano nei laboratori di Interaction Design. Non appena inoltrata la richiesta all'owner tramite il form dedicato, verrai ricontattato con i tempi di lavorazione e le specifiche di spedizione tracciata.
+                        All'interno del mappamondo è presente una scheda Arduino che controlla i LED interni. Questa comunica con una seconda scheda posizionata sulla base tramite i pin seriali RX (0) e TX (1); le due schede condividono la stessa massa (GND) per garantire una corretta stabilità.
                     </div>
                 </div>
             </div>
@@ -1516,7 +1535,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
                 <div class="node-avatar"><i class="fa-solid fa-microchip"></i></div>
                 <div class="node-info">
                     <h4>Alessandro Zanutta</h4>
-                    <p>Lead Hardware Architect & Product Designer</p>
+                    <p>Progettista Hardware & Product Designer</p>
                 </div>
                 <i class="fa-solid fa-arrow-up-right-from-square node-link-indicator"></i>
             </a>
@@ -1525,19 +1544,19 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
                 <div class="node-avatar"><i class="fa-solid fa-code"></i></div>
                 <div class="node-info">
                     <h4>Mirko Cabras</h4>
-                    <p>Lead Interaction Developer & System Engineer</p>
+                    <p>Sviluppatore Software & System Engineer</p>
                 </div>
                 <i class="fa-solid fa-arrow-up-right-from-square node-link-indicator"></i>
             </a>
         </div>
 
         <div class="history-node-wrapper">
-            <h4 class="historical-title">Evoluzione Storica Team</h4>
+            <h4 class="historical-title">Storia del Team</h4>
             <div class="profile-node historical">
                 <div class="node-avatar"><i class="fa-solid fa-user-gear"></i></div>
                 <div class="node-info">
                     <h4>Pietro Albanese</h4>
-                    <p>Ex-Founder / Collaboratore Progetto</p>
+                    <p>Ex-Collaboratore del Progetto</p>
                 </div>
             </div>
         </div>
@@ -1555,7 +1574,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             <img src="https://i.postimg.cc/x8bj8DpZ/Doxa-Logo-(1).png" alt="Doxa Logo Footer" class="footer-logo-img">
         </div>
         <p>&copy; 2026 Doxa Project — Laboratorio d'Esame di Interaction Design.</p>
-        <p class="footer-tech-note">Sviluppato interamente con codice pulito, logiche emulative Open-Source e architetture fisiche interattive.</p>
+        <p class="footer-tech-note">Realizzato con codice standard, schede elettroniche Open-Source e strutture fatte a mano.</p>
     </footer>
 
     <script>
@@ -1565,39 +1584,33 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
         const lightboxClose = document.getElementById('lightboxClose');
         const zoomableImages = document.querySelectorAll('.zoomable-image');
 
-        // Aggancia l'evento di click su ogni immagine zoomabile
         zoomableImages.forEach(img => {
             img.addEventListener('click', () => {
-                lightboxImg.src = img.src; // Copia l'URL dell'immagine cliccata
-                lightboxImg.alt = img.alt; // Copia il testo alternativo
-                lightbox.classList.add('active'); // Mostra l'overlay
-                document.body.style.overflow = 'hidden'; // Blocca lo scroll del sito sotto lo zoom
+                lightboxImg.src = img.src; 
+                lightboxImg.alt = img.alt; 
+                lightbox.classList.add('active'); 
+                document.body.style.overflow = 'hidden'; 
             });
         });
 
-        // Funzione per chiudere lo zoom
         function closeLightbox() {
             lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Riattiva lo scroll della pagina
+            document.body.style.overflow = ''; 
         }
 
-        // Chiudi cliccando sulla X rossa
         lightboxClose.addEventListener('click', closeLightbox);
 
-        // Chiudi cliccando sullo sfondo scuro esterno
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
 
-        // Chiudi premendo il tasto ESC sulla tastiera
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
             }
         });
-
 
         // FUNZIONE PER APRIRE / CHIUDERE IL FORM DI ACQUISTO (BUY HUB)
         function toggleBuyHub() {
@@ -1608,29 +1621,28 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             }
         }
 
-        // GENERAZIONE E PRECOMPILAZIONE EMAIL PER MIRKO CABRAS ALL'INVIO DEL FORM
+        // GENERAZIONE EMAIL PER PREORDINE
         function handleFormSubmit(event) {
             event.preventDefault();
             const email = document.getElementById('userEmail').value;
             const note = document.getElementById('userNote').value;
             const targetOwnerMail = "mirkocabras14@gmail.com";
             
-            const subject = encodeURIComponent("Richiesta di Preordine Anticipato — DOXA Core Premium");
+            const subject = encodeURIComponent("Richiesta di Preordine — DOXA V2.0 Ipotetica");
             const body = encodeURIComponent(
-                "Gentile Team di Doxa,\n\n" +
-                "Desidero richiedere l'acquisto anticipato del dispositivo Doxa Core Premium Edition.\n\n" +
-                "Dettagli Utente per Contatto:\n" +
-                "- Email di riferimento: " + email + "\n\n" +
-                "Note aggiuntive dell'acquirente:\n" +
+                "Ciao Team di Doxa,\n\n" +
+                "Desidero richiedere informazioni per il preordine di Doxa V2.0 (Concept Ipotetico).\n\n" +
+                "Contatto Utente:\n" +
+                "- Email: " + email + "\n\n" +
+                "Note aggiuntive:\n" +
                 note + "\n\n" +
-                "In attesa di istruzioni per procedere con il pagamento.\n" +
-                "Cordiali saluti."
+                "Un cordiale saluto."
             );
             
-            window.location.href = `mailto:${targetOwnerMail}?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:${targetOwnerMail}?subject=${subject}?&body=${body}`;
         }
 
-        // FAQS INTERACTIVE ACCORDION
+        // FAQS ACCORDION
         function toggleFaq(button) {
             const item = button.parentElement;
             const content = item.querySelector('.faq-content');
@@ -1643,7 +1655,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             }
         }
 
-        // EFFETTO 3D TILT INTERATTIVO SULLA CARD DEL PRODOTTO
+        // EFFETTO 3D TILT INTERATTIVO SULLA CARD (SOLO PC)
         const card = document.getElementById('tiltCard');
         if (card && window.innerWidth > 1024) {
             card.parentElement.addEventListener('mousemove', (e) => {
@@ -1664,7 +1676,7 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
             });
         }
 
-        // SCROLL OBSERVER PER LE ANIMAZIONI DELLE BARRE DI PROGRESSO E DEI RECAP DEI NAV LINKS
+        // SCROLL OBSERVER PER LE BARRE DI PROGRESSO
         const observerOptions = { threshold: 0.2 };
         const roadObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1702,5 +1714,3 @@ Ho implementato un sistema di **Lightbox/Modal interattivo custom** in puro Java
     </script>
 </body>
 </html>
-
-```
