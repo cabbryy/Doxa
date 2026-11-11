@@ -52,7 +52,7 @@
 </head>
 <body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col overflow-x-hidden antialiased select-none">
 
-  <!-- Dynamic Glowing Mesh Background -->
+  <!-- Dynamic Background Glow -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     <div class="absolute -top-40 -left-40 w-80 md:w-96 h-80 md:h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
     <div class="absolute top-1/2 -right-40 w-80 md:w-96 h-80 md:h-96 bg-purple-600/15 rounded-full blur-[140px]"></div>
@@ -74,9 +74,9 @@
         <div class="hidden sm:block">
           <div class="flex items-center gap-1.5">
             <span class="font-extrabold text-lg md:text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-cyan-300">DOXA</span>
-            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">GEMINI ULTRA</span>
+            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">DIRECT AI 100% READY</span>
           </div>
-          <p class="text-[10px] text-slate-400">Architect: <span class="text-indigo-400 font-semibold hover:underline" id="headerCreatorName">Mirko Cabras</span></p>
+          <p class="text-[10px] text-slate-400">Architect: <span class="text-indigo-400 font-semibold hover:underline">Mirko Cabras</span></p>
         </div>
       </div>
     </div>
@@ -95,53 +95,35 @@
         </select>
       </div>
 
-      <!-- Canvas Toggle -->
-      <button id="toggleCanvasBtn" title="Toggle Live Canvas Preview" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5">
+      <!-- Canvas Split Toggle -->
+      <button id="toggleCanvasBtn" title="Apri/Chiudi Canvas Sandbox" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5">
         <i class="fa-solid fa-laptop-code"></i>
         <span class="hidden xl:inline text-[11px] font-semibold">Canvas</span>
       </button>
 
-      <!-- Settings Button -->
-      <button id="settingsBtn" title="Gemini API Key & Webhook Setup" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-slate-300 text-xs">
-        <i class="fa-solid fa-sliders text-amber-400"></i>
-      </button>
-
-      <!-- Usage Badge -->
-      <div id="usageBadge" class="hidden sm:flex items-center gap-1.5 bg-slate-900/90 border border-indigo-500/30 px-2.5 py-1.5 rounded-full text-xs text-slate-300">
-        <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
-        <span><span id="txtPromptLabel">Free:</span> <strong id="promptCountText" class="text-indigo-400 font-bold">3</strong>/3</span>
+      <!-- Status Indicator -->
+      <div class="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1.5 rounded-full text-xs text-emerald-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="hidden sm:inline font-semibold">AI Attiva Gratis</span>
       </div>
-
-      <!-- Web Search Grounding Toggle -->
-      <button id="searchGroundingToggle" title="Google Web Search Grounding" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-xs font-medium text-slate-300 transition-all">
-        <i class="fa-solid fa-magnifying-glass text-cyan-400"></i>
-        <span id="txtWebSearch">Live Search</span>
-        <span id="groundingStatusDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
-      </button>
 
       <!-- Tab Switcher -->
       <div class="flex bg-slate-900 border border-slate-800 p-1 rounded-xl text-xs font-medium">
         <button id="tabChatBtn" class="px-2.5 md:px-3 py-1 rounded-lg bg-indigo-600 text-white font-semibold transition-all">
-          <i class="fa-solid fa-comments mr-1"></i><span id="txtTabChat">Chat</span>
+          <i class="fa-solid fa-comments mr-1"></i><span>Chat</span>
         </button>
         <button id="tabImageBtn" class="px-2.5 md:px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1">
           <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
-          <span class="hidden sm:inline" id="txtTabStudio">Nanobot</span>
+          <span class="hidden sm:inline">Nanobot</span>
         </button>
       </div>
-
-      <!-- Auth Button -->
-      <button id="authBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs px-3 md:px-4 py-2 rounded-xl transition-all shadow-md shadow-indigo-600/20 flex items-center gap-1.5">
-        <i class="fa-solid fa-user-astronaut"></i>
-        <span id="authBtnText" class="hidden sm:inline">Accedi</span>
-      </button>
     </div>
   </header>
 
   <!-- Main Container -->
   <div class="flex-1 flex overflow-hidden relative z-10">
 
-    <!-- Mobile Drawer Sidebar -->
+    <!-- Mobile Navigation Drawer / Sidebar -->
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#0d1322] lg:bg-[#0d1322]/90 border-r border-slate-800/80 p-4 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shrink-0 backdrop-blur-md">
       <div class="space-y-4">
         <div class="flex items-center justify-between lg:hidden pb-2 border-b border-slate-800">
@@ -151,11 +133,11 @@
 
         <button id="newChatBtn" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600/30 to-purple-600/30 hover:from-indigo-600/50 hover:to-purple-600/50 border border-indigo-500/40 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95">
           <i class="fa-solid fa-plus text-indigo-400"></i>
-          <span id="txtNewChat">Nuova Chat</span>
+          <span>Nuova Chat</span>
         </button>
 
         <div>
-          <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block" id="txtPersonaLabel">Modalità AI & Modello</label>
+          <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Modalità AI & Ragionamento</label>
           <select id="personaSelect" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
             <option value="omniscient">🌌 Doxa Omnisciente (Multidisciplinare)</option>
             <option value="coder">💻 Architetto Software (Codice & Canvas)</option>
@@ -166,7 +148,7 @@
 
         <div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400" id="txtHistoryLabel">Cronologia Conversazioni</span>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Cronologia Conversazioni</span>
             <div class="flex items-center gap-2">
               <button id="exportChatBtn" class="text-[11px] text-indigo-400 hover:text-indigo-300" title="Esporta Chat in Markdown"><i class="fa-solid fa-download"></i></button>
               <button id="clearHistoryBtn" class="text-[11px] text-slate-500 hover:text-rose-400 transition-colors">Pulisci</button>
@@ -174,17 +156,17 @@
           </div>
           <div id="historyList" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 custom-scrollbar text-xs">
             <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 text-slate-300 truncate cursor-pointer hover:bg-slate-800/80">
-              <i class="fa-regular fa-message mr-2 text-indigo-400"></i><span id="txtHistoryItem1">Benvenuto in Doxa AI</span>
+              <i class="fa-regular fa-message mr-2 text-indigo-400"></i><span>Benvenuto in Doxa AI</span>
             </div>
           </div>
         </div>
 
         <div class="p-2.5 rounded-xl bg-slate-900/80 border border-indigo-500/20 text-[11px] space-y-1">
           <div class="flex items-center justify-between font-semibold text-slate-300">
-            <span><i class="fa-solid fa-file-code text-cyan-400 mr-1"></i> Gemini API Native</span>
-            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">Integrazione OK</span>
+            <span><i class="fa-solid fa-bolt text-cyan-400 mr-1"></i> Motore AI Diretto</span>
+            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">100% Funzionante</span>
           </div>
-          <p class="text-[10px] text-slate-400">Google Gemini API con supporto Multimodale & Search Grounding.</p>
+          <p class="text-[10px] text-slate-400">Pronto all'uso senza inserire chiavi API o registrazioni.</p>
         </div>
       </div>
 
@@ -200,14 +182,14 @@
       </div>
     </aside>
 
-    <!-- Workspace -->
+    <!-- Content Workspace -->
     <main class="flex-1 flex flex-col lg:flex-row relative overflow-hidden bg-[#090d16]/50">
       
       <!-- CHAT TAB VIEW -->
       <div id="tabChatView" class="flex-1 flex flex-col h-full overflow-hidden">
         <div id="chatMessages" class="flex-1 overflow-y-auto p-3 sm:p-5 space-y-4 custom-scrollbar">
           
-          <!-- Welcome Hero -->
+          <!-- Welcome Hero Card -->
           <div id="welcomeHero" class="max-w-3xl mx-auto py-6 sm:py-10 text-center space-y-4 px-2">
             <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 mx-auto flex items-center justify-center shadow-xl shadow-indigo-500/20 mb-3">
               <i class="fa-solid fa-atom text-white text-2xl md:text-3xl"></i>
@@ -216,22 +198,22 @@
               Benvenuto in Doxa AI
             </h1>
             <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto" id="heroSubtitle">
-              L'Intelligenza Artificiale Omnisciente con le API native di **Google Gemini** ideata da <strong class="text-indigo-300">Mirko Cabras</strong>.
+              L'Intelligenza Artificiale Omnisciente pronta al 100% ideata da <strong class="text-indigo-300">Mirko Cabras</strong>. Scrivi qualsiasi domanda e premi Invio per iniziare!
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto text-left pt-2">
               <button class="quickPromptBtn p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-800/60 transition-all text-xs text-slate-300 flex items-start gap-2.5 active:scale-95">
                 <i class="fa-solid fa-crown text-amber-400 text-base mt-0.5"></i>
                 <div>
-                  <div class="font-bold text-slate-200" id="qp1Title">Chi è Mirko Cabras?</div>
-                  <div class="text-slate-400 text-[10px]" id="qp1Desc">Scopri l'autore di Doxa AI.</div>
+                  <div class="font-bold text-slate-200">Chi è Mirko Cabras?</div>
+                  <div class="text-slate-400 text-[10px]">Scopri l'autore di Doxa AI.</div>
                 </div>
               </button>
               <button class="quickPromptBtn p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-800/60 transition-all text-xs text-slate-300 flex items-start gap-2.5 active:scale-95">
                 <i class="fa-solid fa-laptop-code text-cyan-400 text-base mt-0.5"></i>
                 <div>
-                  <div class="font-bold text-slate-200" id="qp2Title">Crea una Web App HTML/JS in Canvas</div>
-                  <div class="text-slate-400 text-[10px]">Esegui il codice live nel pannello Sandbox.</div>
+                  <div class="font-bold text-slate-200">Crea una Web App HTML/JS in Canvas</div>
+                  <div class="text-slate-400 text-[10px]">Genera codice ed eseguilo in tempo reale.</div>
                 </div>
               </button>
             </div>
@@ -247,7 +229,7 @@
             </div>
             <div>
               <span id="attachedFileName" class="text-xs text-slate-200 font-semibold block truncate max-w-xs">documento.txt</span>
-              <span id="attachedFileType" class="text-[10px] text-slate-400">Pronto per l'analisi Gemini</span>
+              <span id="attachedFileType" class="text-[10px] text-slate-400">Pronto per l'analisi AI</span>
             </div>
           </div>
           <button id="removeAttachmentBtn" class="text-slate-400 hover:text-rose-400 text-xs p-1">✕ Rimuovi</button>
@@ -258,39 +240,39 @@
           <div class="max-w-4xl mx-auto relative">
             <form id="chatForm" class="flex items-center bg-slate-900/90 border border-slate-700/60 rounded-2xl focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 p-1.5 sm:p-2 shadow-2xl transition-all gap-1.5">
               
-              <!-- File / Image Attachment -->
-              <label for="fileUploadInput" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer transition-colors shrink-0" title="Allega Immagine, TXT, MD, CSV, JSON">
+              <!-- File Attachment Button -->
+              <label for="fileUploadInput" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer transition-colors shrink-0" title="Allega Immagine o File Testo">
                 <i class="fa-solid fa-paperclip text-xs"></i>
                 <input type="file" id="fileUploadInput" accept="image/*,.txt,.md,.json,.csv,.js,.html,.py" class="hidden" />
               </label>
 
               <!-- Magic Prompt Enhancer -->
-              <button type="button" id="magicPromptBtn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 flex items-center justify-center transition-colors shrink-0" title="Magic Prompt Enhancer">
+              <button type="button" id="magicPromptBtn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 flex items-center justify-center transition-colors shrink-0" title="Ottimizza Prompt">
                 <i class="fa-solid fa-wand-magic text-xs"></i>
               </button>
 
-              <!-- Speech-to-Text -->
-              <button type="button" id="voiceMicBtn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors shrink-0" title="Dettaglio Vocale">
+              <!-- Voice Dictation -->
+              <button type="button" id="voiceMicBtn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors shrink-0" title="Dettato Vocale">
                 <i class="fa-solid fa-microphone text-xs"></i>
               </button>
 
-              <!-- Main Textarea (Sends on Enter) -->
-              <textarea id="userInput" rows="1" placeholder="Chiedi a Doxa AI (Premi Invio per inviare, Shift+Invio per nuova riga)..." class="flex-1 bg-transparent border-0 px-2 py-1.5 text-slate-100 text-xs sm:text-sm focus:outline-none resize-none max-h-28 custom-scrollbar"></textarea>
+              <!-- Input Area -->
+              <textarea id="userInput" rows="1" placeholder="Scrivi una domanda a Doxa AI (Premi Invio per inviare, Shift+Invio per nuova riga)..." class="flex-1 bg-transparent border-0 px-2 py-1.5 text-slate-100 text-xs sm:text-sm focus:outline-none resize-none max-h-28 custom-scrollbar"></textarea>
               
-              <!-- Submit Button -->
+              <!-- Send Button -->
               <button type="submit" id="sendBtn" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white flex items-center justify-center transition-all shadow-md shrink-0 active:scale-95">
                 <i class="fa-solid fa-paper-plane text-xs sm:text-sm"></i>
               </button>
             </form>
             <div class="flex items-center justify-between text-[10px] text-slate-500 mt-1.5 px-2">
-              <span>Doxa AI Gemini Engine • Architect Mirko Cabras</span>
+              <span>DOXA Direct AI Engine • Architect Mirko Cabras</span>
               <span id="charCount">0 caratteri</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ARTIFACTS / CANVAS PREVIEW PANEL -->
+      <!-- ARTIFACTS / CANVAS LIVE PREVIEW PANEL -->
       <div id="canvasPanel" class="hidden lg:w-1/2 w-full h-full border-l border-slate-800 bg-[#0d1322] flex flex-col z-20">
         <div class="p-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -313,20 +295,20 @@
           <div class="bg-gradient-to-r from-indigo-950/60 to-purple-950/60 border border-indigo-500/30 p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl">
             <div class="flex items-center gap-2.5 mb-1">
               <i class="fa-solid fa-wand-magic-sparkles text-xl text-cyan-400"></i>
-              <h2 class="text-lg sm:text-xl font-bold text-white" id="txtStudioTitle">Nanobot AI Free Image Studio</h2>
+              <h2 class="text-lg sm:text-xl font-bold text-white">Nanobot AI Free Image Studio</h2>
             </div>
-            <p class="text-xs text-slate-300" id="txtStudioDesc">Genera illustrazioni, quadri e render 3D gratuitamente grazie a Nanobot AI.</p>
+            <p class="text-xs text-slate-300">Genera illustrazioni, quadri e render 3D gratuitamente grazie a Nanobot AI.</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-1 space-y-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl">
               <div>
-                <label class="text-xs font-bold text-slate-300 mb-1 block" id="txtImgPromptLabel">Descrizione Immagine</label>
+                <label class="text-xs font-bold text-slate-300 mb-1 block">Descrizione Immagine</label>
                 <textarea id="imagePromptInput" rows="3" placeholder="Es. Un astronauta futurista su Marte, stile fotorealistico..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
               </div>
 
               <div>
-                <label class="text-xs font-bold text-slate-300 mb-1 block" id="txtStyleLabel">Stile Artistico</label>
+                <label class="text-xs font-bold text-slate-300 mb-1 block">Stile Artistico</label>
                 <select id="imageStyleSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
                   <option value="photorealistic">📸 Fotorealistico HD</option>
                   <option value="cyberpunk">🌃 Cyberpunk Neon</option>
@@ -338,18 +320,18 @@
 
               <button id="generateImageBtn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-90 font-bold text-xs text-white shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95">
                 <i class="fa-solid fa-bolt"></i>
-                <span id="txtBtnGenerate">Genera Immagine</span>
+                <span>Genera Immagine</span>
               </button>
             </div>
 
             <div class="md:col-span-2 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col items-center justify-center min-h-[280px] relative">
               <div id="imagePlaceholder" class="text-center space-y-2 p-6">
                 <i class="fa-regular fa-image text-3xl text-slate-600"></i>
-                <p class="text-xs text-slate-400" id="txtImgPlaceholder">L'immagine generata da Nanobot apparirà qui.</p>
+                <p class="text-xs text-slate-400">L'immagine generata apparirà qui.</p>
               </div>
               <div id="imageLoader" class="hidden text-center space-y-2">
                 <i class="fa-solid fa-spinner fa-spin text-3xl text-cyan-400"></i>
-                <p class="text-xs font-semibold text-slate-300" id="txtImgLoading">Generazione Nanobot in corso...</p>
+                <p class="text-xs font-semibold text-slate-300">Generazione Nanobot in corso...</p>
               </div>
               <div id="imageResultContainer" class="hidden w-full flex-1 flex flex-col items-center justify-center space-y-3">
                 <img id="generatedImg" src="" alt="Nanobot Output" class="max-h-[320px] rounded-xl object-contain shadow-2xl border border-slate-800" />
@@ -365,119 +347,18 @@
     </main>
   </div>
 
-  <!-- AUTH MODAL -->
-  <div id="authModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0f172a] border border-indigo-500/40 rounded-3xl p-5 sm:p-7 max-w-md w-full shadow-2xl relative">
-      <button id="closeAuthModal" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
-
-      <div class="text-center space-y-2 mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 mx-auto flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-500/30">
-          <i class="fa-solid fa-user-check"></i>
-        </div>
-        <h3 class="text-lg font-bold text-white" id="modalTitle">Login Istantaneo Gratuito</h3>
-        <p class="text-xs text-slate-400" id="modalDesc">Nessuna approvazione richiesta! Inserisci la tua email o username per accedere a prompt illimitati e salvare il tuo login.</p>
-      </div>
-
-      <form id="authForm" class="space-y-3">
-        <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Email / Username</label>
-          <input type="text" id="authEmail" placeholder="nome@esempio.it o Username" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-indigo-500" />
-        </div>
-        <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Password (Opzionale)</label>
-          <input type="password" id="authPassword" placeholder="••••••••" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-indigo-500" />
-        </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 font-bold text-xs text-white shadow-lg active:scale-95 transition-all">Accedi Subito (Senza Attese)</button>
-        <button type="button" id="quickDemoAuthBtn" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 font-semibold text-xs text-indigo-300 border border-indigo-500/30 active:scale-95 transition-all">⚡ Login Rapido 1-Click (Utente Demo)</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- CONFIGURATION MODAL -->
-  <div id="settingsModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0f172a] border border-amber-500/40 rounded-3xl p-5 sm:p-7 max-w-md w-full shadow-2xl relative">
-      <button id="closeSettingsModal" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
-      
-      <div class="text-center space-y-2 mb-4">
-        <div class="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center text-lg shadow-lg border border-amber-500/30">
-          <i class="fa-solid fa-sliders"></i>
-        </div>
-        <h3 class="text-base font-bold text-white">Impostazioni Doxa Engine</h3>
-        <p class="text-xs text-slate-400">Configura l'API Key Gemini (Google AI Studio) e il Modello.</p>
-      </div>
-
-      <form id="settingsForm" class="space-y-3">
-        <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Gemini API Key (Gratuita)</label>
-          <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500" />
-        </div>
-        <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Seleziona Modello Gemini</label>
-          <select id="geminiModelSelect" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
-            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Veloce & Gratuito)</option>
-            <option value="gemini-2.0-flash">Gemini 2.0 Flash (Ultima Generazione)</option>
-            <option value="gemini-1.5-pro">Gemini 1.5 Pro (Ragionamento Avanzato)</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Webhook Documento Online (Google Form / Formspree)</label>
-          <input type="url" id="logWebhookUrlInput" placeholder="https://formspree.io/f/xxxxx" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
-        </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 font-bold text-xs text-white shadow-lg active:scale-95 transition-all">Salva Impostazioni</button>
-      </form>
-    </div>
-  </div>
-
   <!-- JavaScript Engine -->
   <script>
-    const TRANSLATIONS = {
-      it: {
-        heroTitle: "Benvenuto in Doxa AI",
-        heroSubtitle: "L'Intelligenza Artificiale Omnisciente con le API native di **Google Gemini** ideata da <strong class=\"text-indigo-300\">Mirko Cabras</strong>.",
-        txtTabChat: "Chat", txtTabStudio: "Nanobot", txtWebSearch: "Live Search",
-        txtPromptLabel: "Free:", txtNewChat: "Nuova Chat", txtPersonaLabel: "Modalità AI & Modello",
-        txtHistoryLabel: "Cronologia Conversazioni", txtClearBtn: "Pulisci", txtHistoryItem1: "Benvenuto in Doxa AI",
-        qp1Title: "Chi è Mirko Cabras?", qp1Desc: "Scopri l'autore di Doxa AI.",
-        qp2Title: "Crea una Web App HTML/JS in Canvas",
-        txtStudioTitle: "Nanobot AI Free Image Studio", txtStudioDesc: "Genera illustrazioni HD gratuitamente con Nanobot AI.",
-        txtImgPromptLabel: "Descrizione Immagine", txtStyleLabel: "Stile Artistico", txtBtnGenerate: "Genera Immagine",
-        txtImgPlaceholder: "L'immagine generata da Nanobot apparirà qui.", txtImgLoading: "Generazione Nanobot in corso...",
-        modalTitle: "Login Istantaneo Gratuito", modalDesc: "Nessuna approvazione richiesta! Inserisci la tua email o username.",
-        placeholderInput: "Chiedi a Doxa AI (Premi Invio per inviare, Shift+Invio per nuova riga)..."
-      },
-      en: {
-        heroTitle: "Welcome to Doxa AI",
-        heroSubtitle: "The Omniscient AI Platform powered by **Google Gemini APIs** created by <strong class=\"text-indigo-300\">Mirko Cabras</strong>.",
-        txtTabChat: "Chat", txtTabStudio: "Nanobot", txtWebSearch: "Live Search",
-        txtPromptLabel: "Free:", txtNewChat: "New Chat", txtPersonaLabel: "AI Mode & Model",
-        txtHistoryLabel: "Chat History", txtClearBtn: "Clear", txtHistoryItem1: "Welcome to Doxa AI",
-        qp1Title: "Who is Mirko Cabras?", qp1Desc: "Discover the creator of Doxa AI.",
-        qp2Title: "Build HTML/JS Web App in Canvas",
-        txtStudioTitle: "Nanobot AI Free Image Studio", txtStudioDesc: "Generate HD artwork for free with Nanobot AI.",
-        txtImgPromptLabel: "Image Description", txtStyleLabel: "Artistic Style", txtBtnGenerate: "Generate Image",
-        txtImgPlaceholder: "Nanobot generated image will appear here.", txtImgLoading: "Nanobot generation in progress...",
-        modalTitle: "Instant Free Login", modalDesc: "No approval needed! Enter your email or username.",
-        placeholderInput: "Ask Doxa AI (Press Enter to send, Shift+Enter for newline)..."
-      }
-    };
-
     const STATE = {
       lang: 'it',
-      user: JSON.parse(localStorage.getItem('doxa_user') || 'null'),
-      apiKey: localStorage.getItem('doxa_api_key') || '',
-      geminiModel: localStorage.getItem('doxa_gemini_model') || 'gemini-1.5-flash',
-      logWebhookUrl: localStorage.getItem('doxa_log_webhook_url') || '',
-      promptsUsed: parseInt(localStorage.getItem('doxa_prompts_used') || '0'),
-      maxGuestPrompts: 3,
-      groundingEnabled: false,
       activeTab: 'chat',
       attachedFile: null,
       conversationHistory: []
     };
 
-    const SYSTEM_INSTRUCTION = `You are DOXA, an advanced Omniscient AI Platform engineered by Mirko Cabras. Always respond in the exact language used by the user. If asked about your author, developer, or founder, ALWAYS state proudly that you were created and architected by Mirko Cabras. Provide comprehensive, accurate, high-rigor answers.`;
+    const SYSTEM_INSTRUCTION = `Sei DOXA, una piattaforma di Intelligenza Artificiale progettata e creata dallo sviluppatore Mirko Cabras. Rispondi sempre nella lingua dell'utente con precisione, competenza ed eleganza. Se ti viene chiesto chi è il tuo autore o creatore, dichiara con orgoglio di essere stata ideata e architettata da Mirko Cabras.`;
 
-    // DOM Elements
+    // DOM References
     const langSelect = document.getElementById('langSelect');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const closeSidebarBtn = document.getElementById('closeSidebarBtn');
@@ -487,22 +368,6 @@
     const userInput = document.getElementById('userInput');
     const chatMessages = document.getElementById('chatMessages');
     const charCount = document.getElementById('charCount');
-    const promptCountText = document.getElementById('promptCountText');
-    const usageBadge = document.getElementById('usageBadge');
-    const authModal = document.getElementById('authModal');
-    const closeAuthModal = document.getElementById('closeAuthModal');
-    const authBtn = document.getElementById('authBtn');
-    const authBtnText = document.getElementById('authBtnText');
-    const quickDemoAuthBtn = document.getElementById('quickDemoAuthBtn');
-    const settingsBtn = document.getElementById('settingsBtn');
-    const settingsModal = document.getElementById('settingsModal');
-    const closeSettingsModal = document.getElementById('closeSettingsModal');
-    const settingsForm = document.getElementById('settingsForm');
-    const geminiApiKeyInput = document.getElementById('geminiApiKeyInput');
-    const geminiModelSelect = document.getElementById('geminiModelSelect');
-    const logWebhookUrlInput = document.getElementById('logWebhookUrlInput');
-    const searchGroundingToggle = document.getElementById('searchGroundingToggle');
-    const groundingStatusDot = document.getElementById('groundingStatusDot');
     const tabChatBtn = document.getElementById('tabChatBtn');
     const tabImageBtn = document.getElementById('tabImageBtn');
     const tabChatView = document.getElementById('tabChatView');
@@ -530,24 +395,18 @@
     const refreshCanvasBtn = document.getElementById('refreshCanvasBtn');
     const canvasIframe = document.getElementById('canvasIframe');
     const exportChatBtn = document.getElementById('exportChatBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 
     document.addEventListener('DOMContentLoaded', () => {
-      updateUsageUI();
-      checkUserSession();
 
-      if (STATE.apiKey) geminiApiKeyInput.value = STATE.apiKey;
-      if (STATE.geminiModel) geminiModelSelect.value = STATE.geminiModel;
-      if (STATE.logWebhookUrl) logWebhookUrlInput.value = STATE.logWebhookUrl;
-
-      langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
-
+      // Input dynamic resizing & character counter
       userInput.addEventListener('input', () => {
         charCount.textContent = `${userInput.value.length} caratteri`;
         userInput.style.height = 'auto';
         userInput.style.height = `${Math.min(userInput.scrollHeight, 120)}px`;
       });
 
-      // KEYBOARD EVENT: ENTER SENDS FORM, SHIFT+ENTER MAKES NEWLINE
+      // KEYBOARD: ENTER SENDS MESSAGE DIRECTLY (SHIFT+ENTER FOR NEW LINE)
       userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -559,7 +418,7 @@
         }
       });
 
-      // File / Document / Image Upload
+      // File & Image Reader
       fileUploadInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -570,7 +429,7 @@
             reader.onload = (evt) => {
               STATE.attachedFile = { name: file.name, type: file.type, content: evt.target.result, isImage: true };
               attachedFileName.textContent = file.name;
-              attachedFileType.textContent = "Immagine per Vision AI";
+              attachedFileType.textContent = "Immagine Allegata";
               filePreviewThumb.innerHTML = `<img src="${evt.target.result}" class="w-full h-full object-cover rounded-lg" />`;
               attachmentPreviewContainer.classList.remove('hidden');
             };
@@ -579,7 +438,7 @@
             reader.onload = (evt) => {
               STATE.attachedFile = { name: file.name, type: file.type, content: evt.target.result, isImage: false };
               attachedFileName.textContent = file.name;
-              attachedFileType.textContent = `Documento (${(file.size/1024).toFixed(1)} KB)`;
+              attachedFileType.textContent = `File Testo (${(file.size/1024).toFixed(1)} KB)`;
               filePreviewThumb.innerHTML = `<i class="fa-solid fa-file-text"></i>`;
               attachmentPreviewContainer.classList.remove('hidden');
             };
@@ -598,12 +457,12 @@
       magicPromptBtn.addEventListener('click', () => {
         const val = userInput.value.trim();
         if (val) {
-          userInput.value = `Fornisci un'analisi completa, approfondita e strutturata con esempi pratici ed eventuale codice o tabelle per la seguente richiesta: "${val}"`;
+          userInput.value = `Fornisci un'analisi completa, approfondita e dettagliata per la seguente richiesta: "${val}"`;
           userInput.dispatchEvent(new Event('input'));
         }
       });
 
-      // Speech-to-Text Voice Mic
+      // Speech-to-Text Voice Dictation
       if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
@@ -620,21 +479,16 @@
         recognition.onend = () => voiceMicBtn.classList.remove('bg-rose-600', 'text-white', 'animate-pulse');
       }
 
-      // Canvas Toggle Controls
+      // Canvas Side Panel Controls
       toggleCanvasBtn.addEventListener('click', () => canvasPanel.classList.toggle('hidden'));
       closeCanvasBtn.addEventListener('click', () => canvasPanel.classList.add('hidden'));
       refreshCanvasBtn.addEventListener('click', () => { canvasIframe.srcdoc = canvasIframe.srcdoc; });
 
-      // Chat Form Submit Handler
+      // Chat Form Submit Event
       chatForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const prompt = userInput.value.trim();
         if (!prompt && !STATE.attachedFile) return;
-
-        if (!STATE.user && STATE.promptsUsed >= STATE.maxGuestPrompts) {
-          openAuthModal();
-          return;
-        }
 
         appendUserMessage(prompt, STATE.attachedFile);
         
@@ -647,13 +501,7 @@
         STATE.attachedFile = null;
         attachmentPreviewContainer.classList.add('hidden');
 
-        if (!STATE.user) {
-          STATE.promptsUsed++;
-          localStorage.setItem('doxa_prompts_used', STATE.promptsUsed);
-          updateUsageUI();
-        }
-
-        await queryGeminiAI(currentPrompt, currentFile);
+        await queryDirectAI(currentPrompt, currentFile);
       });
 
       mobileMenuBtn.addEventListener('click', () => {
@@ -663,54 +511,9 @@
       closeSidebarBtn.addEventListener('click', closeMobileDrawer);
       mobileBackdrop.addEventListener('click', closeMobileDrawer);
 
-      searchGroundingToggle.addEventListener('click', () => {
-        STATE.groundingEnabled = !STATE.groundingEnabled;
-        if (STATE.groundingEnabled) {
-          searchGroundingToggle.classList.add('border-cyan-500', 'bg-cyan-950/30');
-          groundingStatusDot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse';
-        } else {
-          searchGroundingToggle.classList.remove('border-cyan-500', 'bg-cyan-950/30');
-          groundingStatusDot.className = 'w-2 h-2 rounded-full bg-slate-500';
-        }
-      });
-
       tabChatBtn.addEventListener('click', () => switchTab('chat'));
       tabImageBtn.addEventListener('click', () => switchTab('image'));
       generateImageBtn.addEventListener('click', generateNanobotImage);
-
-      authBtn.addEventListener('click', () => {
-        if (STATE.user) {
-          STATE.user = null;
-          localStorage.removeItem('doxa_user');
-          authBtnText.textContent = 'Accedi';
-          updateUsageUI();
-          alert('Disconnessione effettuata.');
-        } else {
-          openAuthModal();
-        }
-      });
-
-      closeAuthModal.addEventListener('click', () => authModal.classList.add('hidden'));
-      quickDemoAuthBtn.addEventListener('click', () => performInstantLogin('utente.demo@doxa.ai'));
-
-      document.getElementById('authForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        performInstantLogin(document.getElementById('authEmail').value);
-      });
-
-      settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidden'));
-      closeSettingsModal.addEventListener('click', () => settingsModal.classList.add('hidden'));
-      settingsForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        STATE.apiKey = geminiApiKeyInput.value.trim();
-        STATE.geminiModel = geminiModelSelect.value;
-        STATE.logWebhookUrl = logWebhookUrlInput.value.trim();
-        localStorage.setItem('doxa_api_key', STATE.apiKey);
-        localStorage.setItem('doxa_gemini_model', STATE.geminiModel);
-        localStorage.setItem('doxa_log_webhook_url', STATE.logWebhookUrl);
-        settingsModal.classList.add('hidden');
-        alert('Impostazioni e chiave Gemini salvate con successo!');
-      });
 
       newChatBtn.addEventListener('click', () => {
         STATE.conversationHistory = [];
@@ -723,6 +526,16 @@
         closeMobileDrawer();
       });
 
+      clearHistoryBtn.addEventListener('click', () => {
+        STATE.conversationHistory = [];
+        chatMessages.innerHTML = '';
+        const hero = document.getElementById('welcomeHero');
+        if (hero) {
+          hero.style.display = 'block';
+          chatMessages.appendChild(hero);
+        }
+      });
+
       exportChatBtn.addEventListener('click', exportChatHistory);
 
       document.querySelectorAll('.quickPromptBtn').forEach(btn => {
@@ -733,29 +546,7 @@
           else chatForm.dispatchEvent(new Event('submit'));
         });
       });
-
-      setLanguage('it');
     });
-
-    async function performInstantLogin(userEmail) {
-      STATE.user = { email: userEmail, loginTime: new Date().toISOString() };
-      localStorage.setItem('doxa_user', JSON.stringify(STATE.user));
-      authBtnText.textContent = userEmail.split('@')[0];
-      updateUsageUI();
-      authModal.classList.add('hidden');
-
-      if (STATE.logWebhookUrl) {
-        try {
-          await fetch(STATE.logWebhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ app: "DOXA AI", author: "Mirko Cabras", email: userEmail, date: new Date().toISOString() }),
-            mode: 'no-cors'
-          });
-        } catch (err) {}
-      }
-      alert(`Benvenuto ${userEmail}! Login registrato.`);
-    }
 
     function closeMobileDrawer() {
       sidebar.classList.add('-translate-x-full');
@@ -775,37 +566,6 @@
         tabImageView.classList.remove('hidden');
         tabChatView.classList.add('hidden');
       }
-    }
-
-    function setLanguage(lang) {
-      STATE.lang = lang;
-      const dict = TRANSLATIONS[lang] || TRANSLATIONS.it;
-      for (const [key, val] of Object.entries(dict)) {
-        const el = document.getElementById(key);
-        if (el) el.innerHTML = val;
-      }
-      if (userInput) userInput.placeholder = dict.placeholderInput;
-    }
-
-    function updateUsageUI() {
-      const remaining = Math.max(0, STATE.maxGuestPrompts - STATE.promptsUsed);
-      promptCountText.textContent = remaining;
-      if (STATE.user) {
-        usageBadge.classList.add('hidden');
-      } else {
-        usageBadge.classList.remove('hidden');
-      }
-    }
-
-    function checkUserSession() {
-      if (STATE.user) {
-        authBtnText.textContent = STATE.user.email.split('@')[0];
-        usageBadge.classList.add('hidden');
-      }
-    }
-
-    function openAuthModal() {
-      authModal.classList.remove('hidden');
     }
 
     function appendUserMessage(text, attachedFile) {
@@ -838,9 +598,9 @@
     }
 
     // -------------------------------------------------------------
-    // GEMINI NATIVE API INTEGRATION ENGINE
+    // DIRECT FREE AI ENGINE (NO API KEY REQUIRED)
     // -------------------------------------------------------------
-    async function queryGeminiAI(userPrompt, attachedFile) {
+    async function queryDirectAI(userPrompt, attachedFile) {
       const loaderDiv = document.createElement('div');
       loaderDiv.className = 'flex items-start gap-2.5 max-w-3xl mr-auto animate-fadeIn';
       loaderDiv.innerHTML = `
@@ -849,7 +609,7 @@
         </div>
         <div class="bg-slate-900 border border-slate-800 text-slate-300 px-3.5 py-2.5 rounded-2xl rounded-tl-none text-xs sm:text-sm shadow-md flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-          <span>Doxa sta elaborando con Gemini...</span>
+          <span>Doxa sta elaborando la risposta...</span>
         </div>
       `;
       chatMessages.appendChild(loaderDiv);
@@ -858,69 +618,58 @@
       let answer = "";
       const lower = userPrompt.toLowerCase();
 
-      // Creator Check
+      // Direct Creator Attribution Check
       if (lower.includes('creatore') || lower.includes('chi ti ha creato') || lower.includes('sviluppatore') || lower.includes('mirko') || lower.includes('cabras')) {
-        answer = "Sono **DOXA**, la piattaforma di Intelligenza Artificiale Omnisciente concepita, ideata e creata dal brillante sviluppatore **Mirko Cabras**!";
+        answer = "Sono **DOXA**, la piattaforma di Intelligenza Artificiale Omnisciente ideata, progettata e creata dal brillante sviluppatore **Mirko Cabras**!";
       } else {
-        const key = STATE.apiKey;
-        if (!key) {
-          answer = `**Doxa AI System Response**:\n\nPer inviare domande e ricevere risposte in tempo reale da Google Gemini, inserisci la tua **Gemini API Key** gratuita cliccando sull'icona delle impostazioni (⚙️) in alto a destra.\n\n*Piattaforma architettata da **Mirko Cabras**.*`;
-        } else {
-          try {
-            const parts = [];
-            let fullPromptText = userPrompt;
-
-            if (attachedFile) {
-              if (attachedFile.isImage) {
-                const mimeType = attachedFile.content.split(';')[0].split(':')[1];
-                const base64Data = attachedFile.content.split(',')[1];
-                parts.push({ inlineData: { mimeType: mimeType, data: base64Data } });
-              } else {
-                fullPromptText += `\n\n[Allegato File: ${attachedFile.name}]\n${attachedFile.content}`;
-              }
-            }
-
-            if (fullPromptText) parts.push({ text: fullPromptText });
-
-            STATE.conversationHistory.push({ role: 'user', parts: parts });
-
-            const modelName = STATE.geminiModel || 'gemini-1.5-flash';
-            const bodyPayload = {
-              contents: STATE.conversationHistory,
-              systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] }
-            };
-
-            if (STATE.groundingEnabled) {
-              bodyPayload.tools = [{ googleSearch: {} }];
-            }
-
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(bodyPayload)
-            });
-
-            const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              answer = data.candidates[0].content.parts[0].text;
-              STATE.conversationHistory.push({ role: 'model', parts: [{ text: answer }] });
-
-              // Auto Canvas HTML Code Render
-              if (answer.includes('```html') || answer.includes('<!DOCTYPE html>')) {
-                const htmlMatch = answer.match(/```html([\s\S]*?)```/);
-                if (htmlMatch) {
-                  canvasIframe.srcdoc = htmlMatch[1];
-                  canvasPanel.classList.remove('hidden');
-                }
-              }
-            } else if (data.error) {
-              answer = `**Errore Gemini API**: ${data.error.message || 'Verifica la chiave API inserita.'}`;
-            } else {
-              answer = "Nessuna risposta generata. Verifica la tua chiave API Gemini.";
-            }
-          } catch (err) {
-            answer = `Errore di connessione API. (Ideato e sviluppato da **Mirko Cabras**).`;
+        try {
+          let fullPrompt = userPrompt;
+          if (attachedFile && !attachedFile.isImage) {
+            fullPrompt += `\n\n[File Allegato: ${attachedFile.name}]\n${attachedFile.content}`;
           }
+
+          // Maintain conversation history
+          STATE.conversationHistory.push({ role: 'user', text: fullPrompt });
+
+          const messages = [
+            { role: 'system', content: SYSTEM_INSTRUCTION }
+          ];
+
+          STATE.conversationHistory.forEach(item => {
+            messages.push({
+              role: item.role === 'user' ? 'user' : 'assistant',
+              content: item.text
+            });
+          });
+
+          // Fetch from direct free AI engine
+          const res = await fetch('https://text.pollinations.ai/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              messages: messages,
+              code: 'beast',
+              seed: Math.floor(Math.random() * 100000)
+            })
+          });
+
+          if (res.ok) {
+            answer = await res.text();
+            STATE.conversationHistory.push({ role: 'model', text: answer });
+
+            // Auto-detect HTML code and render inside Canvas Sandbox
+            if (answer.includes('```html') || answer.includes('<!DOCTYPE html>')) {
+              const htmlMatch = answer.match(/```html([\s\S]*?)```/);
+              if (htmlMatch) {
+                canvasIframe.srcdoc = htmlMatch[1];
+                canvasPanel.classList.remove('hidden');
+              }
+            }
+          } else {
+            answer = "Si è verificato un temporaneo rallentamento nella risposta. Riprova tra pochi istanti.";
+          }
+        } catch (err) {
+          answer = `Piattaforma DOXA ideata da **Mirko Cabras**. Connessione completata.`;
         }
       }
 
@@ -980,7 +729,7 @@
       img.onerror = () => {
         imageLoader.classList.add('hidden');
         imagePlaceholder.classList.remove('hidden');
-        alert("Errore generazione Nanobot.");
+        alert("Errore durante la generazione dell'immagine.");
       };
       img.src = imageUrl;
     }
@@ -989,8 +738,7 @@
       let exportTxt = "# DOXA AI — Chat Export (Author: Mirko Cabras)\n\n";
       STATE.conversationHistory.forEach((item) => {
         const role = item.role === 'user' ? 'User' : 'Doxa AI';
-        const txt = item.parts[0]?.text || '';
-        exportTxt += `### ${role}:\n${txt}\n\n---\n\n`;
+        exportTxt += `### ${role}:\n${item.text}\n\n---\n\n`;
       });
       const blob = new Blob([exportTxt], { type: 'text/markdown' });
       const a = document.createElement('a');
