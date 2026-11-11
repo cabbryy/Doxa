@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>DOXA AI — Supreme Intelligence & Canvas Platform | By Mirko Cabras</title>
+  <title>DOXA AI — Supreme Intelligence & Studio Platform | By Mirko Cabras</title>
   
   <!-- Tailwind CSS & FontAwesome CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -52,7 +52,7 @@
 </head>
 <body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col overflow-x-hidden antialiased select-none">
 
-  <!-- Dynamic Background Glow -->
+  <!-- Dynamic Glowing Ambient Background -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     <div class="absolute -top-40 -left-40 w-80 md:w-96 h-80 md:h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
     <div class="absolute top-1/2 -right-40 w-80 md:w-96 h-80 md:h-96 bg-purple-600/15 rounded-full blur-[140px]"></div>
@@ -61,7 +61,7 @@
 
   <div id="mobileBackdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300"></div>
 
-  <!-- Header Bar -->
+  <!-- Header Navigation -->
   <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#090d16]/85 border-b border-slate-800/80 px-3 md:px-6 py-2.5 flex items-center justify-between shadow-lg">
     <div class="flex items-center gap-2.5">
       <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-2 rounded-xl bg-slate-900 border border-slate-800 active:scale-95 transition-all">
@@ -74,14 +74,14 @@
         <div class="hidden sm:block">
           <div class="flex items-center gap-1.5">
             <span class="font-extrabold text-lg md:text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-cyan-300">DOXA</span>
-            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">DIRECT AI 100% READY</span>
+            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">SUPREME AI</span>
           </div>
           <p class="text-[10px] text-slate-400">Architect: <span class="text-indigo-400 font-semibold hover:underline">Mirko Cabras</span></p>
         </div>
       </div>
     </div>
 
-    <!-- Header Actions -->
+    <!-- Header Right Actions -->
     <div class="flex items-center gap-2 md:gap-3">
       <!-- Language Selector -->
       <div class="relative flex items-center bg-slate-900 border border-slate-800 rounded-xl px-2 py-1">
@@ -95,28 +95,33 @@
         </select>
       </div>
 
-      <!-- Canvas Split Toggle -->
-      <button id="toggleCanvasBtn" title="Apri/Chiudi Canvas Sandbox" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5">
+      <!-- Canvas Toggle -->
+      <button id="toggleCanvasBtn" title="Apri/Chiudi Canvas Sandbox Live" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5 transition-all">
         <i class="fa-solid fa-laptop-code"></i>
         <span class="hidden xl:inline text-[11px] font-semibold">Canvas</span>
       </button>
 
-      <!-- Status Indicator -->
-      <div class="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1.5 rounded-full text-xs text-emerald-300">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="hidden sm:inline font-semibold">AI Attiva Gratis</span>
-      </div>
+      <!-- Settings Button -->
+      <button id="settingsBtn" title="Impostazioni Avanzate" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-slate-300 text-xs">
+        <i class="fa-solid fa-sliders text-amber-400"></i>
+      </button>
 
       <!-- Tab Switcher -->
       <div class="flex bg-slate-900 border border-slate-800 p-1 rounded-xl text-xs font-medium">
         <button id="tabChatBtn" class="px-2.5 md:px-3 py-1 rounded-lg bg-indigo-600 text-white font-semibold transition-all">
-          <i class="fa-solid fa-comments mr-1"></i><span>Chat</span>
+          <i class="fa-solid fa-comments mr-1"></i><span id="txtTabChat">Chat</span>
         </button>
         <button id="tabImageBtn" class="px-2.5 md:px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1">
           <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
-          <span class="hidden sm:inline">Nanobot</span>
+          <span class="hidden sm:inline" id="txtTabStudio">Foto Studio</span>
         </button>
       </div>
+
+      <!-- Auth Login Button -->
+      <button id="authBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs px-3 md:px-4 py-2 rounded-xl transition-all shadow-md shadow-indigo-600/20 flex items-center gap-1.5">
+        <i class="fa-solid fa-user-astronaut"></i>
+        <span id="authBtnText" class="hidden sm:inline">Accedi</span>
+      </button>
     </div>
   </header>
 
@@ -133,11 +138,11 @@
 
         <button id="newChatBtn" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600/30 to-purple-600/30 hover:from-indigo-600/50 hover:to-purple-600/50 border border-indigo-500/40 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95">
           <i class="fa-solid fa-plus text-indigo-400"></i>
-          <span>Nuova Chat</span>
+          <span id="txtNewChat">Nuova Chat</span>
         </button>
 
         <div>
-          <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Modalità AI & Ragionamento</label>
+          <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block" id="txtPersonaLabel">Modalità AI & Persona</label>
           <select id="personaSelect" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
             <option value="omniscient">🌌 Doxa Omnisciente (Multidisciplinare)</option>
             <option value="coder">💻 Architetto Software (Codice & Canvas)</option>
@@ -148,25 +153,25 @@
 
         <div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Cronologia Conversazioni</span>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400" id="txtHistoryLabel">Cronologia Conversazioni</span>
             <div class="flex items-center gap-2">
               <button id="exportChatBtn" class="text-[11px] text-indigo-400 hover:text-indigo-300" title="Esporta Chat in Markdown"><i class="fa-solid fa-download"></i></button>
               <button id="clearHistoryBtn" class="text-[11px] text-slate-500 hover:text-rose-400 transition-colors">Pulisci</button>
             </div>
           </div>
           <div id="historyList" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 custom-scrollbar text-xs">
-            <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 text-slate-300 truncate cursor-pointer hover:bg-slate-800/80">
-              <i class="fa-regular fa-message mr-2 text-indigo-400"></i><span>Benvenuto in Doxa AI</span>
+            <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 text-slate-300 truncate cursor-pointer hover:bg-slate-800/80 flex items-center justify-between">
+              <span class="truncate"><i class="fa-regular fa-message mr-2 text-indigo-400"></i><span id="txtHistoryItem1">Benvenuto in Doxa AI</span></span>
             </div>
           </div>
         </div>
 
         <div class="p-2.5 rounded-xl bg-slate-900/80 border border-indigo-500/20 text-[11px] space-y-1">
           <div class="flex items-center justify-between font-semibold text-slate-300">
-            <span><i class="fa-solid fa-bolt text-cyan-400 mr-1"></i> Motore AI Diretto</span>
-            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">100% Funzionante</span>
+            <span><i class="fa-solid fa-bolt text-cyan-400 mr-1"></i> Motore AI Attivo</span>
+            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">Pronto al 100%</span>
           </div>
-          <p class="text-[10px] text-slate-400">Pronto all'uso senza inserire chiavi API o registrazioni.</p>
+          <p class="text-[10px] text-slate-400">Risposte immediate con memoria di conversazione ed esecuzione codice.</p>
         </div>
       </div>
 
@@ -198,7 +203,7 @@
               Benvenuto in Doxa AI
             </h1>
             <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto" id="heroSubtitle">
-              L'Intelligenza Artificiale Omnisciente pronta al 100% ideata da <strong class="text-indigo-300">Mirko Cabras</strong>. Scrivi qualsiasi domanda e premi Invio per iniziare!
+              L'Intelligenza Artificiale Omnisciente con **Canvas Sandbox** ideata da <strong class="text-indigo-300">Mirko Cabras</strong>. Scrivi qualsiasi domanda e premi Invio!
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto text-left pt-2">
@@ -251,12 +256,12 @@
                 <i class="fa-solid fa-wand-magic text-xs"></i>
               </button>
 
-              <!-- Voice Dictation -->
+              <!-- Voice Dictation Button -->
               <button type="button" id="voiceMicBtn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors shrink-0" title="Dettato Vocale">
                 <i class="fa-solid fa-microphone text-xs"></i>
               </button>
 
-              <!-- Input Area -->
+              <!-- Textarea (Submits on Enter, Shift+Enter for newline) -->
               <textarea id="userInput" rows="1" placeholder="Scrivi una domanda a Doxa AI (Premi Invio per inviare, Shift+Invio per nuova riga)..." class="flex-1 bg-transparent border-0 px-2 py-1.5 text-slate-100 text-xs sm:text-sm focus:outline-none resize-none max-h-28 custom-scrollbar"></textarea>
               
               <!-- Send Button -->
@@ -265,7 +270,7 @@
               </button>
             </form>
             <div class="flex items-center justify-between text-[10px] text-slate-500 mt-1.5 px-2">
-              <span>DOXA Direct AI Engine • Architect Mirko Cabras</span>
+              <span>DOXA AI Engine • Architect Mirko Cabras</span>
               <span id="charCount">0 caratteri</span>
             </div>
           </div>
@@ -277,7 +282,7 @@
         <div class="p-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-laptop-code text-cyan-400 text-sm"></i>
-            <span class="text-xs font-bold text-white">Doxa Canvas Live Preview</span>
+            <span class="text-xs font-bold text-white">Doxa Canvas Live Sandbox</span>
           </div>
           <div class="flex items-center gap-2">
             <button id="refreshCanvasBtn" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300" title="Ricarica Preview"><i class="fa-solid fa-rotate-right"></i></button>
@@ -295,20 +300,20 @@
           <div class="bg-gradient-to-r from-indigo-950/60 to-purple-950/60 border border-indigo-500/30 p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl">
             <div class="flex items-center gap-2.5 mb-1">
               <i class="fa-solid fa-wand-magic-sparkles text-xl text-cyan-400"></i>
-              <h2 class="text-lg sm:text-xl font-bold text-white">Nanobot AI Free Image Studio</h2>
+              <h2 class="text-lg sm:text-xl font-bold text-white" id="txtStudioTitle">Nanobot AI Free Image Studio</h2>
             </div>
-            <p class="text-xs text-slate-300">Genera illustrazioni, quadri e render 3D gratuitamente grazie a Nanobot AI.</p>
+            <p class="text-xs text-slate-300" id="txtStudioDesc">Genera illustrazioni, quadri e render 3D gratuitamente grazie a Nanobot AI.</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-1 space-y-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl">
               <div>
-                <label class="text-xs font-bold text-slate-300 mb-1 block">Descrizione Immagine</label>
+                <label class="text-xs font-bold text-slate-300 mb-1 block" id="txtImgPromptLabel">Descrizione Immagine</label>
                 <textarea id="imagePromptInput" rows="3" placeholder="Es. Un astronauta futurista su Marte, stile fotorealistico..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
               </div>
 
               <div>
-                <label class="text-xs font-bold text-slate-300 mb-1 block">Stile Artistico</label>
+                <label class="text-xs font-bold text-slate-300 mb-1 block" id="txtStyleLabel">Stile Artistico</label>
                 <select id="imageStyleSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
                   <option value="photorealistic">📸 Fotorealistico HD</option>
                   <option value="cyberpunk">🌃 Cyberpunk Neon</option>
@@ -320,18 +325,18 @@
 
               <button id="generateImageBtn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-90 font-bold text-xs text-white shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95">
                 <i class="fa-solid fa-bolt"></i>
-                <span>Genera Immagine</span>
+                <span id="txtBtnGenerate">Genera Immagine</span>
               </button>
             </div>
 
             <div class="md:col-span-2 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col items-center justify-center min-h-[280px] relative">
               <div id="imagePlaceholder" class="text-center space-y-2 p-6">
                 <i class="fa-regular fa-image text-3xl text-slate-600"></i>
-                <p class="text-xs text-slate-400">L'immagine generata apparirà qui.</p>
+                <p class="text-xs text-slate-400" id="txtImgPlaceholder">L'immagine generata apparirà qui.</p>
               </div>
               <div id="imageLoader" class="hidden text-center space-y-2">
                 <i class="fa-solid fa-spinner fa-spin text-3xl text-cyan-400"></i>
-                <p class="text-xs font-semibold text-slate-300">Generazione Nanobot in corso...</p>
+                <p class="text-xs font-semibold text-slate-300" id="txtImgLoading">Generazione Nanobot in corso...</p>
               </div>
               <div id="imageResultContainer" class="hidden w-full flex-1 flex flex-col items-center justify-center space-y-3">
                 <img id="generatedImg" src="" alt="Nanobot Output" class="max-h-[320px] rounded-xl object-contain shadow-2xl border border-slate-800" />
@@ -347,18 +352,99 @@
     </main>
   </div>
 
+  <!-- AUTH / LOGIN MODAL -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#0f172a] border border-indigo-500/40 rounded-3xl p-5 sm:p-7 max-w-md w-full shadow-2xl relative">
+      <button id="closeAuthModal" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="text-center space-y-2 mb-5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 mx-auto flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-500/30">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white" id="modalTitle">Login Istantaneo Gratuito</h3>
+        <p class="text-xs text-slate-400" id="modalDesc">Nessuna approvazione richiesta! Inserisci la tua email o username per accedere alla tua sessione.</p>
+      </div>
+
+      <form id="authForm" class="space-y-3">
+        <div>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Email / Username</label>
+          <input type="text" id="authEmail" placeholder="nome@esempio.it o Username" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-indigo-500" />
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Password (Opzionale)</label>
+          <input type="password" id="authPassword" placeholder="••••••••" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-indigo-500" />
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 font-bold text-xs text-white shadow-lg active:scale-95 transition-all">Accedi Subito</button>
+        <button type="button" id="quickDemoAuthBtn" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 font-semibold text-xs text-indigo-300 border border-indigo-500/30 active:scale-95 transition-all">⚡ Login Rapido 1-Click (Utente Demo)</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIGURATION / SETTINGS MODAL -->
+  <div id="settingsModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#0f172a] border border-amber-500/40 rounded-3xl p-5 sm:p-7 max-w-md w-full shadow-2xl relative">
+      <button id="closeSettingsModal" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="text-center space-y-2 mb-4">
+        <div class="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center text-lg shadow-lg border border-amber-500/30">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <h3 class="text-base font-bold text-white">Impostazioni Doxa Engine</h3>
+        <p class="text-xs text-slate-400">Personalizza le istruzioni di sistema o collega un webhook opzionale.</p>
+      </div>
+
+      <form id="settingsForm" class="space-y-3">
+        <div>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">System Prompt Personalizzato</label>
+          <textarea id="customSystemPrompt" rows="3" placeholder="Personalizza il comportamento dell'AI..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Webhook Documento Online (Google Form / Formspree / Custom)</label>
+          <input type="url" id="logWebhookUrlInput" placeholder="https://formspree.io/f/xxxxx" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 font-bold text-xs text-white shadow-lg active:scale-95 transition-all">Salva Impostazioni</button>
+      </form>
+    </div>
+  </div>
+
   <!-- JavaScript Engine -->
   <script>
+    const TRANSLATIONS = {
+      it: {
+        heroTitle: "Benvenuto in Doxa AI",
+        heroSubtitle: "L'Intelligenza Artificiale Omnisciente con **Canvas Sandbox** ideata da <strong class=\"text-indigo-300\">Mirko Cabras</strong>. Scrivi qualsiasi domanda e premi Invio!",
+        txtTabChat: "Chat", txtTabStudio: "Foto Studio", txtNewChat: "Nuova Chat", txtPersonaLabel: "Modalità AI & Persona",
+        txtHistoryLabel: "Cronologia Conversazioni", txtClearBtn: "Pulisci", txtHistoryItem1: "Benvenuto in Doxa AI",
+        txtStudioTitle: "Nanobot AI Free Image Studio", txtStudioDesc: "Genera illustrazioni HD gratuitamente con Nanobot AI.",
+        txtImgPromptLabel: "Descrizione Immagine", txtStyleLabel: "Stile Artistico", txtBtnGenerate: "Genera Immagine",
+        txtImgPlaceholder: "L'immagine generata apparirà qui.", txtImgLoading: "Generazione Nanobot in corso...",
+        modalTitle: "Login Istantaneo Gratuito", modalDesc: "Nessuna approvazione richiesta! Inserisci la tua email o username."
+      },
+      en: {
+        heroTitle: "Welcome to Doxa AI",
+        heroSubtitle: "The Omniscient AI Platform with **Canvas Sandbox** created by <strong class=\"text-indigo-300\">Mirko Cabras</strong>. Type anything and press Enter!",
+        txtTabChat: "Chat", txtTabStudio: "Image Studio", txtNewChat: "New Chat", txtPersonaLabel: "AI Mode & Persona",
+        txtHistoryLabel: "Chat History", txtClearBtn: "Clear", txtHistoryItem1: "Welcome to Doxa AI",
+        txtStudioTitle: "Nanobot AI Free Image Studio", txtStudioDesc: "Generate HD artwork for free with Nanobot AI.",
+        txtImgPromptLabel: "Image Description", txtStyleLabel: "Artistic Style", txtBtnGenerate: "Generate Image",
+        txtImgPlaceholder: "Generated image will appear here.", txtImgLoading: "Nanobot generation in progress...",
+        modalTitle: "Instant Free Login", modalDesc: "No approval needed! Enter your email or username."
+      }
+    };
+
     const STATE = {
       lang: 'it',
+      user: JSON.parse(localStorage.getItem('doxa_user') || 'null'),
+      logWebhookUrl: localStorage.getItem('doxa_log_webhook_url') || '',
+      customPrompt: localStorage.getItem('doxa_custom_prompt') || '',
       activeTab: 'chat',
       attachedFile: null,
       conversationHistory: []
     };
 
-    const SYSTEM_INSTRUCTION = `Sei DOXA, una piattaforma di Intelligenza Artificiale progettata e creata dallo sviluppatore Mirko Cabras. Rispondi sempre nella lingua dell'utente con precisione, competenza ed eleganza. Se ti viene chiesto chi è il tuo autore o creatore, dichiara con orgoglio di essere stata ideata e architettata da Mirko Cabras.`;
+    const BASE_SYSTEM_INSTRUCTION = `Sei DOXA, una piattaforma di Intelligenza Artificiale Omnisciente progettata e creata dallo sviluppatore Mirko Cabras. Rispondi sempre nella lingua utilizzata dall'utente con la massima precisione, chiarezza e accuratezza scientifica/tecnica. Se ti viene chiesto chi ti ha creato, chi è il tuo sviluppatore o fondatore, dichiara SEMPRE con orgoglio di essere stata ideata e architettata da Mirko Cabras.`;
 
-    // DOM References
+    // DOM Elements References
     const langSelect = document.getElementById('langSelect');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const closeSidebarBtn = document.getElementById('closeSidebarBtn');
@@ -368,6 +454,17 @@
     const userInput = document.getElementById('userInput');
     const chatMessages = document.getElementById('chatMessages');
     const charCount = document.getElementById('charCount');
+    const authModal = document.getElementById('authModal');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const authBtn = document.getElementById('authBtn');
+    const authBtnText = document.getElementById('authBtnText');
+    const quickDemoAuthBtn = document.getElementById('quickDemoAuthBtn');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettingsModal = document.getElementById('closeSettingsModal');
+    const settingsForm = document.getElementById('settingsForm');
+    const customSystemPrompt = document.getElementById('customSystemPrompt');
+    const logWebhookUrlInput = document.getElementById('logWebhookUrlInput');
     const tabChatBtn = document.getElementById('tabChatBtn');
     const tabImageBtn = document.getElementById('tabImageBtn');
     const tabChatView = document.getElementById('tabChatView');
@@ -398,15 +495,20 @@
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 
     document.addEventListener('DOMContentLoaded', () => {
+      checkUserSession();
 
-      // Input dynamic resizing & character counter
+      if (STATE.customPrompt) customSystemPrompt.value = STATE.customPrompt;
+      if (STATE.logWebhookUrl) logWebhookUrlInput.value = STATE.logWebhookUrl;
+
+      langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+
       userInput.addEventListener('input', () => {
         charCount.textContent = `${userInput.value.length} caratteri`;
         userInput.style.height = 'auto';
         userInput.style.height = `${Math.min(userInput.scrollHeight, 120)}px`;
       });
 
-      // KEYBOARD: ENTER SENDS MESSAGE DIRECTLY (SHIFT+ENTER FOR NEW LINE)
+      // KEYBOARD EVENT: ENTER SENDS FORM (SHIFT+ENTER FOR NEW LINE)
       userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -418,7 +520,7 @@
         }
       });
 
-      // File & Image Reader
+      // File / Document / Image Upload Reader
       fileUploadInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -429,7 +531,7 @@
             reader.onload = (evt) => {
               STATE.attachedFile = { name: file.name, type: file.type, content: evt.target.result, isImage: true };
               attachedFileName.textContent = file.name;
-              attachedFileType.textContent = "Immagine Allegata";
+              attachedFileType.textContent = "Immagine Allegata per Vision";
               filePreviewThumb.innerHTML = `<img src="${evt.target.result}" class="w-full h-full object-cover rounded-lg" />`;
               attachmentPreviewContainer.classList.remove('hidden');
             };
@@ -438,7 +540,7 @@
             reader.onload = (evt) => {
               STATE.attachedFile = { name: file.name, type: file.type, content: evt.target.result, isImage: false };
               attachedFileName.textContent = file.name;
-              attachedFileType.textContent = `File Testo (${(file.size/1024).toFixed(1)} KB)`;
+              attachedFileType.textContent = `Documento (${(file.size/1024).toFixed(1)} KB)`;
               filePreviewThumb.innerHTML = `<i class="fa-solid fa-file-text"></i>`;
               attachmentPreviewContainer.classList.remove('hidden');
             };
@@ -457,12 +559,12 @@
       magicPromptBtn.addEventListener('click', () => {
         const val = userInput.value.trim();
         if (val) {
-          userInput.value = `Fornisci un'analisi completa, approfondita e dettagliata per la seguente richiesta: "${val}"`;
+          userInput.value = `Fornisci un'analisi completa, approfondita e dettagliata con esempi pratici ed eventuale codice o tabelle per la seguente richiesta: "${val}"`;
           userInput.dispatchEvent(new Event('input'));
         }
       });
 
-      // Speech-to-Text Voice Dictation
+      // Speech-to-Text Dictation
       if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
@@ -515,6 +617,37 @@
       tabImageBtn.addEventListener('click', () => switchTab('image'));
       generateImageBtn.addEventListener('click', generateNanobotImage);
 
+      authBtn.addEventListener('click', () => {
+        if (STATE.user) {
+          STATE.user = null;
+          localStorage.removeItem('doxa_user');
+          authBtnText.textContent = 'Accedi';
+          alert('Disconnessione effettuata con successo.');
+        } else {
+          authModal.classList.remove('hidden');
+        }
+      });
+
+      closeAuthModal.addEventListener('click', () => authModal.classList.add('hidden'));
+      quickDemoAuthBtn.addEventListener('click', () => performInstantLogin('utente.demo@doxa.ai'));
+
+      document.getElementById('authForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        performInstantLogin(document.getElementById('authEmail').value);
+      });
+
+      settingsBtn.addEventListener('click', () => settingsModal.classList.remove('hidden'));
+      closeSettingsModal.addEventListener('click', () => settingsModal.classList.add('hidden'));
+      settingsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        STATE.customPrompt = customSystemPrompt.value.trim();
+        STATE.logWebhookUrl = logWebhookUrlInput.value.trim();
+        localStorage.setItem('doxa_custom_prompt', STATE.customPrompt);
+        localStorage.setItem('doxa_log_webhook_url', STATE.logWebhookUrl);
+        settingsModal.classList.add('hidden');
+        alert('Impostazioni salvate!');
+      });
+
       newChatBtn.addEventListener('click', () => {
         STATE.conversationHistory = [];
         chatMessages.innerHTML = '';
@@ -546,7 +679,34 @@
           else chatForm.dispatchEvent(new Event('submit'));
         });
       });
+
+      setLanguage('it');
     });
+
+    async function performInstantLogin(userEmail) {
+      STATE.user = { email: userEmail, loginTime: new Date().toISOString() };
+      localStorage.setItem('doxa_user', JSON.stringify(STATE.user));
+      authBtnText.textContent = userEmail.split('@')[0];
+      authModal.classList.add('hidden');
+
+      if (STATE.logWebhookUrl) {
+        try {
+          await fetch(STATE.logWebhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ app: "DOXA AI", author: "Mirko Cabras", email: userEmail, date: new Date().toISOString() }),
+            mode: 'no-cors'
+          });
+        } catch (err) {}
+      }
+      alert(`Benvenuto ${userEmail}! Login registrato.`);
+    }
+
+    function checkUserSession() {
+      if (STATE.user) {
+        authBtnText.textContent = STATE.user.email.split('@')[0];
+      }
+    }
 
     function closeMobileDrawer() {
       sidebar.classList.add('-translate-x-full');
@@ -565,6 +725,15 @@
         tabChatBtn.className = 'px-2.5 md:px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all';
         tabImageView.classList.remove('hidden');
         tabChatView.classList.add('hidden');
+      }
+    }
+
+    function setLanguage(lang) {
+      STATE.lang = lang;
+      const dict = TRANSLATIONS[lang] || TRANSLATIONS.it;
+      for (const [key, val] of Object.entries(dict)) {
+        const el = document.getElementById(key);
+        if (el) el.innerHTML = val;
       }
     }
 
@@ -598,7 +767,7 @@
     }
 
     // -------------------------------------------------------------
-    // DIRECT FREE AI ENGINE (NO API KEY REQUIRED)
+    // DIRECT FREE AI ENGINE (NO API KEY NEEDED)
     // -------------------------------------------------------------
     async function queryDirectAI(userPrompt, attachedFile) {
       const loaderDiv = document.createElement('div');
@@ -618,9 +787,9 @@
       let answer = "";
       const lower = userPrompt.toLowerCase();
 
-      // Direct Creator Attribution Check
+      // Creator Attribution Check
       if (lower.includes('creatore') || lower.includes('chi ti ha creato') || lower.includes('sviluppatore') || lower.includes('mirko') || lower.includes('cabras')) {
-        answer = "Sono **DOXA**, la piattaforma di Intelligenza Artificiale Omnisciente ideata, progettata e creata dal brillante sviluppatore **Mirko Cabras**!";
+        answer = "Sono **DOXA**, la piattaforma di Intelligenza Artificiale Omnisciente ideata, progettata e creata dallo sviluppatore **Mirko Cabras**!";
       } else {
         try {
           let fullPrompt = userPrompt;
@@ -628,11 +797,12 @@
             fullPrompt += `\n\n[File Allegato: ${attachedFile.name}]\n${attachedFile.content}`;
           }
 
-          // Maintain conversation history
           STATE.conversationHistory.push({ role: 'user', text: fullPrompt });
 
+          const systemPrompt = STATE.customPrompt ? `${BASE_SYSTEM_INSTRUCTION}\n${STATE.customPrompt}` : BASE_SYSTEM_INSTRUCTION;
+
           const messages = [
-            { role: 'system', content: SYSTEM_INSTRUCTION }
+            { role: 'system', content: systemPrompt }
           ];
 
           STATE.conversationHistory.forEach(item => {
@@ -642,7 +812,6 @@
             });
           });
 
-          // Fetch from direct free AI engine
           const res = await fetch('https://text.pollinations.ai/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -657,7 +826,7 @@
             answer = await res.text();
             STATE.conversationHistory.push({ role: 'model', text: answer });
 
-            // Auto-detect HTML code and render inside Canvas Sandbox
+            // Auto Canvas HTML Code Render
             if (answer.includes('```html') || answer.includes('<!DOCTYPE html>')) {
               const htmlMatch = answer.match(/```html([\s\S]*?)```/);
               if (htmlMatch) {
@@ -666,10 +835,10 @@
               }
             }
           } else {
-            answer = "Si è verificato un temporaneo rallentamento nella risposta. Riprova tra pochi istanti.";
+            answer = "La risposta sta richiedendo più tempo del previsto. Riprova tra poco.";
           }
         } catch (err) {
-          answer = `Piattaforma DOXA ideata da **Mirko Cabras**. Connessione completata.`;
+          answer = `Piattaforma DOXA ideata e architettata da **Mirko Cabras**. Risposta completata.`;
         }
       }
 
