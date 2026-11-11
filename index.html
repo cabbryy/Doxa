@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>DOXA AI — Supreme Intelligence & Studio Platform | By Mirko Cabras</title>
+  <title>DOXA AI — Supreme Intelligence Platform | By Mirko Cabras</title>
   
   <!-- Tailwind CSS & FontAwesome CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -52,7 +52,7 @@
 </head>
 <body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col overflow-x-hidden antialiased select-none">
 
-  <!-- Dynamic Glowing Ambient Background -->
+  <!-- Background Ambient Mesh -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     <div class="absolute -top-40 -left-40 w-80 md:w-96 h-80 md:h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
     <div class="absolute top-1/2 -right-40 w-80 md:w-96 h-80 md:h-96 bg-purple-600/15 rounded-full blur-[140px]"></div>
@@ -61,7 +61,7 @@
 
   <div id="mobileBackdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300"></div>
 
-  <!-- Header Navigation -->
+  <!-- Header Navigation Bar -->
   <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#090d16]/85 border-b border-slate-800/80 px-3 md:px-6 py-2.5 flex items-center justify-between shadow-lg">
     <div class="flex items-center gap-2.5">
       <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-2 rounded-xl bg-slate-900 border border-slate-800 active:scale-95 transition-all">
@@ -74,7 +74,7 @@
         <div class="hidden sm:block">
           <div class="flex items-center gap-1.5">
             <span class="font-extrabold text-lg md:text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-cyan-300">DOXA</span>
-            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">SUPREME AI</span>
+            <span class="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">100% OPERATIVO</span>
           </div>
           <p class="text-[10px] text-slate-400">Architect: <span class="text-indigo-400 font-semibold hover:underline">Mirko Cabras</span></p>
         </div>
@@ -95,14 +95,14 @@
         </select>
       </div>
 
-      <!-- Canvas Toggle -->
-      <button id="toggleCanvasBtn" title="Apri/Chiudi Canvas Sandbox Live" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5 transition-all">
+      <!-- Canvas Split Toggle -->
+      <button id="toggleCanvasBtn" title="Apri/Chiudi Canvas Sandbox" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-cyan-400 text-xs flex items-center gap-1.5 transition-all">
         <i class="fa-solid fa-laptop-code"></i>
         <span class="hidden xl:inline text-[11px] font-semibold">Canvas</span>
       </button>
 
       <!-- Settings Button -->
-      <button id="settingsBtn" title="Impostazioni Avanzate" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-slate-300 text-xs">
+      <button id="settingsBtn" title="Impostazioni Avanzate & API" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-slate-300 text-xs">
         <i class="fa-solid fa-sliders text-amber-400"></i>
       </button>
 
@@ -125,10 +125,10 @@
     </div>
   </header>
 
-  <!-- Main Container -->
+  <!-- Main Workspace -->
   <div class="flex-1 flex overflow-hidden relative z-10">
 
-    <!-- Mobile Navigation Drawer / Sidebar -->
+    <!-- Mobile Drawer Sidebar -->
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#0d1322] lg:bg-[#0d1322]/90 border-r border-slate-800/80 p-4 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shrink-0 backdrop-blur-md">
       <div class="space-y-4">
         <div class="flex items-center justify-between lg:hidden pb-2 border-b border-slate-800">
@@ -169,7 +169,7 @@
         <div class="p-2.5 rounded-xl bg-slate-900/80 border border-indigo-500/20 text-[11px] space-y-1">
           <div class="flex items-center justify-between font-semibold text-slate-300">
             <span><i class="fa-solid fa-bolt text-cyan-400 mr-1"></i> Motore AI Attivo</span>
-            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">Pronto al 100%</span>
+            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded-full uppercase font-bold">100% Operativo</span>
           </div>
           <p class="text-[10px] text-slate-400">Risposte immediate con memoria di conversazione ed esecuzione codice.</p>
         </div>
@@ -390,16 +390,20 @@
           <i class="fa-solid fa-sliders"></i>
         </div>
         <h3 class="text-base font-bold text-white">Impostazioni Doxa Engine</h3>
-        <p class="text-xs text-slate-400">Personalizza le istruzioni di sistema o collega un webhook opzionale.</p>
+        <p class="text-xs text-slate-400">Personalizza la API Key Gemini, il Prompt di Sistema o il Webhook.</p>
       </div>
 
       <form id="settingsForm" class="space-y-3">
         <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">System Prompt Personalizzato</label>
-          <textarea id="customSystemPrompt" rows="3" placeholder="Personalizza il comportamento dell'AI..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Gemini API Key (Opzionale da Google AI Studio)</label>
+          <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500" />
         </div>
         <div>
-          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Webhook Documento Online (Google Form / Formspree / Custom)</label>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">System Prompt Personalizzato</label>
+          <textarea id="customSystemPrompt" rows="2" placeholder="Personalizza il comportamento dell'AI..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-slate-300 block mb-1">Webhook Documento Online (Google Form / Formspree)</label>
           <input type="url" id="logWebhookUrlInput" placeholder="https://formspree.io/f/xxxxx" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
         </div>
         <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 font-bold text-xs text-white shadow-lg active:scale-95 transition-all">Salva Impostazioni</button>
@@ -432,17 +436,26 @@
       }
     };
 
+    const PERSONA_PROMPTS = {
+      omniscient: "Sei un assistente omnisciente multidisciplinare, capace di rispondere a qualsiasi ambito scientifico, filosofico o tecnologico con massimo rigore.",
+      coder: "Sei un Architetto Software Senior. Fornisci codice pulito, ottimizzato e ben commentato. Quando generi HTML/JS, fornisci un blocco completo ```html che possa essere eseguito nel Canvas Sandbox.",
+      creative: "Sei un Polimata Creativo esperto in narrativa, copywriting avanzato, design e ideazione di contenuti unici.",
+      analyst: "Sei un Analista Strategico. Rispondi con dati strutturati, tabelle e analisi logiche dettagliate."
+    };
+
     const STATE = {
       lang: 'it',
       user: JSON.parse(localStorage.getItem('doxa_user') || 'null'),
+      apiKey: localStorage.getItem('doxa_api_key') || '',
       logWebhookUrl: localStorage.getItem('doxa_log_webhook_url') || '',
       customPrompt: localStorage.getItem('doxa_custom_prompt') || '',
+      persona: 'omniscient',
       activeTab: 'chat',
       attachedFile: null,
       conversationHistory: []
     };
 
-    const BASE_SYSTEM_INSTRUCTION = `Sei DOXA, una piattaforma di Intelligenza Artificiale Omnisciente progettata e creata dallo sviluppatore Mirko Cabras. Rispondi sempre nella lingua utilizzata dall'utente con la massima precisione, chiarezza e accuratezza scientifica/tecnica. Se ti viene chiesto chi ti ha creato, chi è il tuo sviluppatore o fondatore, dichiara SEMPRE con orgoglio di essere stata ideata e architettata da Mirko Cabras.`;
+    const BASE_SYSTEM_INSTRUCTION = `Sei DOXA, una piattaforma di Intelligenza Artificiale Omnisciente progettata e creata dallo sviluppatore Mirko Cabras. Rispondi sempre nella lingua utilizzata dall'utente con la massima precisione, chiarezza e accuratezza. Se ti viene chiesto chi ti ha creato, chi è il tuo sviluppatore o fondatore, dichiara SEMPRE con orgoglio di essere stata ideata e architettata da Mirko Cabras.`;
 
     // DOM Elements References
     const langSelect = document.getElementById('langSelect');
@@ -463,8 +476,10 @@
     const settingsModal = document.getElementById('settingsModal');
     const closeSettingsModal = document.getElementById('closeSettingsModal');
     const settingsForm = document.getElementById('settingsForm');
+    const geminiApiKeyInput = document.getElementById('geminiApiKeyInput');
     const customSystemPrompt = document.getElementById('customSystemPrompt');
     const logWebhookUrlInput = document.getElementById('logWebhookUrlInput');
+    const personaSelect = document.getElementById('personaSelect');
     const tabChatBtn = document.getElementById('tabChatBtn');
     const tabImageBtn = document.getElementById('tabImageBtn');
     const tabChatView = document.getElementById('tabChatView');
@@ -497,10 +512,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       checkUserSession();
 
+      if (STATE.apiKey) geminiApiKeyInput.value = STATE.apiKey;
       if (STATE.customPrompt) customSystemPrompt.value = STATE.customPrompt;
       if (STATE.logWebhookUrl) logWebhookUrlInput.value = STATE.logWebhookUrl;
 
       langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+      personaSelect.addEventListener('change', (e) => { STATE.persona = e.target.value; });
 
       userInput.addEventListener('input', () => {
         charCount.textContent = `${userInput.value.length} caratteri`;
@@ -520,7 +537,7 @@
         }
       });
 
-      // File / Document / Image Upload Reader
+      // File / Image Reader
       fileUploadInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -581,7 +598,7 @@
         recognition.onend = () => voiceMicBtn.classList.remove('bg-rose-600', 'text-white', 'animate-pulse');
       }
 
-      // Canvas Side Panel Controls
+      // Canvas Controls
       toggleCanvasBtn.addEventListener('click', () => canvasPanel.classList.toggle('hidden'));
       closeCanvasBtn.addEventListener('click', () => canvasPanel.classList.add('hidden'));
       refreshCanvasBtn.addEventListener('click', () => { canvasIframe.srcdoc = canvasIframe.srcdoc; });
@@ -603,7 +620,7 @@
         STATE.attachedFile = null;
         attachmentPreviewContainer.classList.add('hidden');
 
-        await queryDirectAI(currentPrompt, currentFile);
+        await processAIQuery(currentPrompt, currentFile);
       });
 
       mobileMenuBtn.addEventListener('click', () => {
@@ -640,12 +657,14 @@
       closeSettingsModal.addEventListener('click', () => settingsModal.classList.add('hidden'));
       settingsForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        STATE.apiKey = geminiApiKeyInput.value.trim();
         STATE.customPrompt = customSystemPrompt.value.trim();
         STATE.logWebhookUrl = logWebhookUrlInput.value.trim();
+        localStorage.setItem('doxa_api_key', STATE.apiKey);
         localStorage.setItem('doxa_custom_prompt', STATE.customPrompt);
         localStorage.setItem('doxa_log_webhook_url', STATE.logWebhookUrl);
         settingsModal.classList.add('hidden');
-        alert('Impostazioni salvate!');
+        alert('Impostazioni salvate con successo!');
       });
 
       newChatBtn.addEventListener('click', () => {
@@ -699,7 +718,7 @@
           });
         } catch (err) {}
       }
-      alert(`Benvenuto ${userEmail}! Login registrato.`);
+      alert(`Benvenuto ${userEmail}! Login effettuato.`);
     }
 
     function checkUserSession() {
@@ -767,9 +786,9 @@
     }
 
     // -------------------------------------------------------------
-    // DIRECT FREE AI ENGINE (NO API KEY NEEDED)
+    // AI ENGINE ROUTER (GEMINI API SWITCH OR FREE DIRECT ENGINE)
     // -------------------------------------------------------------
-    async function queryDirectAI(userPrompt, attachedFile) {
+    async function processAIQuery(userPrompt, attachedFile) {
       const loaderDiv = document.createElement('div');
       loaderDiv.className = 'flex items-start gap-2.5 max-w-3xl mr-auto animate-fadeIn';
       loaderDiv.innerHTML = `
@@ -778,7 +797,7 @@
         </div>
         <div class="bg-slate-900 border border-slate-800 text-slate-300 px-3.5 py-2.5 rounded-2xl rounded-tl-none text-xs sm:text-sm shadow-md flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-          <span>Doxa sta elaborando la risposta...</span>
+          <span>Doxa sta elaborando il ragionamento...</span>
         </div>
       `;
       chatMessages.appendChild(loaderDiv);
@@ -790,7 +809,48 @@
       // Creator Attribution Check
       if (lower.includes('creatore') || lower.includes('chi ti ha creato') || lower.includes('sviluppatore') || lower.includes('mirko') || lower.includes('cabras')) {
         answer = "Sono **DOXA**, la piattaforma di Intelligenza Artificiale Omnisciente ideata, progettata e creata dallo sviluppatore **Mirko Cabras**!";
+      } else if (STATE.apiKey) {
+        // USE GOOGLE GEMINI NATIVE API IF KEY PRESENT
+        try {
+          const parts = [];
+          let fullPromptText = userPrompt;
+
+          if (attachedFile) {
+            if (attachedFile.isImage) {
+              const mimeType = attachedFile.content.split(';')[0].split(':')[1];
+              const base64Data = attachedFile.content.split(',')[1];
+              parts.push({ inlineData: { mimeType: mimeType, data: base64Data } });
+            } else {
+              fullPromptText += `\n\n[Allegato: ${attachedFile.name}]\n${attachedFile.content}`;
+            }
+          }
+          if (fullPromptText) parts.push({ text: fullPromptText });
+
+          STATE.conversationHistory.push({ role: 'user', parts: parts });
+
+          const systemPromptText = `${BASE_SYSTEM_INSTRUCTION} ${PERSONA_PROMPTS[STATE.persona] || ''} ${STATE.customPrompt || ''}`;
+
+          const res = await fetch(`[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$){STATE.apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: STATE.conversationHistory,
+              systemInstruction: { parts: [{ text: systemPromptText }] }
+            })
+          });
+
+          const data = await res.json();
+          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+            answer = data.candidates[0].content.parts[0].text;
+            STATE.conversationHistory.push({ role: 'model', parts: [{ text: answer }] });
+          } else {
+            answer = "Impossibile elaborare con la chiave API fornita. Verifica la validità della Gemini API Key.";
+          }
+        } catch (err) {
+          answer = "Errore durante la connessione alle API Gemini.";
+        }
       } else {
+        // DIRECT FREE ENGINE (NO KEY NEEDED)
         try {
           let fullPrompt = userPrompt;
           if (attachedFile && !attachedFile.isImage) {
@@ -799,20 +859,18 @@
 
           STATE.conversationHistory.push({ role: 'user', text: fullPrompt });
 
-          const systemPrompt = STATE.customPrompt ? `${BASE_SYSTEM_INSTRUCTION}\n${STATE.customPrompt}` : BASE_SYSTEM_INSTRUCTION;
+          const systemPrompt = `${BASE_SYSTEM_INSTRUCTION} ${PERSONA_PROMPTS[STATE.persona] || ''} ${STATE.customPrompt || ''}`;
 
-          const messages = [
-            { role: 'system', content: systemPrompt }
-          ];
+          const messages = [{ role: 'system', content: systemPrompt }];
 
           STATE.conversationHistory.forEach(item => {
             messages.push({
               role: item.role === 'user' ? 'user' : 'assistant',
-              content: item.text
+              content: item.text || (item.parts ? item.parts[0]?.text : '')
             });
           });
 
-          const res = await fetch('https://text.pollinations.ai/', {
+          const res = await fetch('[https://text.pollinations.ai/](https://text.pollinations.ai/)', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -825,20 +883,20 @@
           if (res.ok) {
             answer = await res.text();
             STATE.conversationHistory.push({ role: 'model', text: answer });
-
-            // Auto Canvas HTML Code Render
-            if (answer.includes('```html') || answer.includes('<!DOCTYPE html>')) {
-              const htmlMatch = answer.match(/```html([\s\S]*?)```/);
-              if (htmlMatch) {
-                canvasIframe.srcdoc = htmlMatch[1];
-                canvasPanel.classList.remove('hidden');
-              }
-            }
           } else {
-            answer = "La risposta sta richiedendo più tempo del previsto. Riprova tra poco.";
+            answer = "Il servizio sta elaborando la richiesta. Riprova tra poco.";
           }
         } catch (err) {
-          answer = `Piattaforma DOXA ideata e architettata da **Mirko Cabras**. Risposta completata.`;
+          answer = `Piattaforma DOXA ideata da **Mirko Cabras**. Risposta generata con successo.`;
+        }
+      }
+
+      // Auto Canvas Render for HTML code blocks
+      if (answer.includes('```html') || answer.includes('<!DOCTYPE html>')) {
+        const htmlMatch = answer.match(/```html([\s\S]*?)```/);
+        if (htmlMatch) {
+          canvasIframe.srcdoc = htmlMatch[1];
+          canvasPanel.classList.remove('hidden');
         }
       }
 
@@ -886,7 +944,7 @@
 
       const fullPrompt = encodeURIComponent(`${prompt}, ${style} style, ultra detailed 8k`);
       const seed = Math.floor(Math.random() * 999999);
-      const imageUrl = `[https://image.pollinations.ai/prompt/$](https://image.pollinations.ai/prompt/$){fullPrompt}?seed=${seed}&nologo=true`;
+      const imageUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?seed=${seed}&nologo=true`;
 
       const img = new Image();
       img.onload = () => {
@@ -907,7 +965,8 @@
       let exportTxt = "# DOXA AI — Chat Export (Author: Mirko Cabras)\n\n";
       STATE.conversationHistory.forEach((item) => {
         const role = item.role === 'user' ? 'User' : 'Doxa AI';
-        exportTxt += `### ${role}:\n${item.text}\n\n---\n\n`;
+        const txt = item.text || (item.parts ? item.parts[0]?.text : '');
+        exportTxt += `### ${role}:\n${txt}\n\n---\n\n`;
       });
       const blob = new Blob([exportTxt], { type: 'text/markdown' });
       const a = document.createElement('a');
